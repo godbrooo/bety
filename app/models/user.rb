@@ -5,5 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :prizes
-  # has_many :games, through: :bets
+  has_many :bets
+  has_many :games, through: :bets
+
+  validates :bets, uniqueness: { scope: :game,
+    message: "should bet only one time per game" }
+
 end
