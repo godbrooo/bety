@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.4.3'
 
+gem 'postmark-rails'
 gem 'devise'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'figaro'
