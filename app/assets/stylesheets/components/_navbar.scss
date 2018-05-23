@@ -9,6 +9,16 @@
   align-items: center;
   justify-content: space-between;
 }
+.navbar-mobile {
+  background: #D42828;
+  transition: all 0.3s ease;
+  height: 30px;
+  padding: 0px 30px;
+  position: absolute;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+}
 
 /* Logo */
 .navbar-wagon-brand img {

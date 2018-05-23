@@ -1,8 +1,30 @@
 .mobile-background {
 
+
   background: #D42828;
+  height: calc(100vh - 0px);
   transition: all 0.3s ease;
   display: flex;
-  align-items: center;
+  align-item: center;
 
+}
+.mobile-contain {
+
+  margin-top: 10vh;
+  margin: auto;
+  display: flex;
+  align: center;
+  text-align: center;
+}
+
+.mobile-H1{
+  margin-top: 5px;
+  color: #FFFFFF !important;
+  font-size:15px !important;
+  text-align: center;
+
+}
+
+.banner-mobile{
+    margin-top: 10vh;
 }
