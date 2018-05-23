@@ -12,7 +12,11 @@ def create
   # raise
   @game = Game.new(game_params)
   @game.status = "pending"
-  if @game.save
+   @bet = Bet.new
+   @bet.user = current_user
+   @bet.challenger = true
+   @bet.game = @game
+  if @game.save && @bet.save
    redirect_to game_path(@game)
   else
    render :new
