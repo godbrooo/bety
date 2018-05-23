@@ -1,0 +1,16 @@
+<% @games.each do |game| %>
+<ul>
+  <li>
+    <%= game.title %>
+  </li>
+  <li>
+    <%= game.description %>
+  </li>
+  <li>
+    <%= game.price %>
+  </li>
+  <li>
+    <%= game.dead_line %>
+  </ul>
+  <br>
+  <% end %>
