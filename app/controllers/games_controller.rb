@@ -1,5 +1,8 @@
 class GamesController < ApplicationController
 
+def index
+  @games = Game.all.where(:user == current_user)
+end
 
 def new
   @game = Game.new

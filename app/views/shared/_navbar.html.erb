@@ -10,8 +10,8 @@
     <% if user_signed_in? %>
 
       <!-- Links when logged in -->
-      <%= link_to "Games ongoing", "#", class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Create a game", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Games ongoing", games_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Create a game", new_game_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
 
       <!-- Avatar with dropdown menu -->
