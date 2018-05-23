@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   get 'games/:id/invite', to: 'games#invite', as: :invite
   post 'games/:id/invite', to: 'games#save_invite'
 
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
 
 end
