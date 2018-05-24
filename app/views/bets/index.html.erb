@@ -1,0 +1,9 @@
+<% current_user.bets.each do |bet| %>
+<ul>
+  <li>
+    <%= bet.game.title %>
+  </li>
+</ul>
+
+<br>
+<% end %>

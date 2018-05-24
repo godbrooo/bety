@@ -6,6 +6,7 @@ end
 
 def new
   @game = Game.new
+
 end
 
 def create
@@ -13,6 +14,8 @@ def create
   @game = Game.new(game_params)
   @game.status = "pending"
   if @game.save
+     @bet = Bet.new(game_id: @game.id,user_id: current_user.id)
+     @bet.save
    redirect_to game_path(@game)
   else
    render :new

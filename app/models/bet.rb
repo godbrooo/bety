@@ -4,7 +4,7 @@
 #
 #  id         :bigint(8)        not null, primary key
 #  challenger :boolean
-#  status     :string
+#  status     :integer          default("pending")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  game_id    :bigint(8)
@@ -24,4 +24,6 @@
 class Bet < ApplicationRecord
   belongs_to :game
   belongs_to :user
+
+  enum status: [ :pending, :ongoing, :closed]
 end
