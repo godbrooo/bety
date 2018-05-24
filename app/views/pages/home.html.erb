@@ -1,15 +1,51 @@
 <div class="hidden-xs ">
 
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+  <h1>Pages#home</h1>
+  <p>Find me in app/views/pages/home.html.erb</p>
 
 </div>
 
 
 <div class="hidden-sm hidden-md hidden-lg">
   <div class="mobile-background">
-    <div class="col-xs-12">
-    <%=  image_tag "logo.png" %>
+    <div class="mobile-contain">
+      <div class="mobile-H1">
+
+      <div class="col-xs-12">
+
+       <div class="dropdown">
+        <% if user_signed_in?%>
+        <div class="banner-mobile"></div>
+      <h1>BETY</h1>
+      <div>Tes paris entre amis</div>
+
+
+      <%= link_to new_game_path do %>
+      <%= image_tag "logo_fond_blanc.png" %>
+      <% end %>
+      <% else %>
+      <%= link_to new_user_session_path do %>
+      <%= image_tag "logo_fond_blanc.png" %>
+
+      <% end %>
+      <% end %>
+      <div class="mobile-H1">
+       <div>Touche BETY pour créer un pari</div>
+     </div>
+     <div class="banner-mobile">
+      <%= link_to "Mes paris en cours", games_path, class: "btn btn-bety-primary " %>
+
     </div>
-   </div>
+
+
+<!--       <i  data-toggle="dropdown"></i>
+      <ul class="dropdown-menu dropdown-menu-center navbar-wagon-dropdown-menu">
+        <li> new_user_session_path >Some mobile link</a></li>
+        <li><a href="#">Other one</a></li>
+        <li><a href="#">Other one</a></li>
+      -->   </ul>
+    </div>
+  </div>
+</div>
+</div>
 </div>
