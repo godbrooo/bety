@@ -1,18 +1,127 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-sm-offset-4 ">
+      <%# @game.video %>
       <%= simple_form_for(@game) do |f| %>
 
-      <%= f.input :title, placeholder: 'ex : soirée poker', input_html:{class:'my_input'}%>
-      <%= f.input :description, placeholder: 'RDV chez moi à partir de 21h', input_html:{class:'my_input'}%>
-      <%= f.input :price, placeholder: '€', input_html:{class:'my_input'}%>
-      <%= f.input :dead_line, placeholder: '18/06/18', input_html:{class:'my_input'}%>
+      <%= f.input :title,
+      label: 'Titre',
+      placeholder: 'ex : soirée poker',
+      input_html:{class:'my_input'}%>
       <%= f.input :photo %>
-      <%=f.input :photo_cache, as: :hidden %>
+      <%=f.input :photo_cache,
+      as: :hidden %>
+      <%= f.input :description,
+      placeholder: 'RDV chez moi à partir de 21h',
+      input_html:{class:'my_input'}%>
+      <%= f.input :price,
+      label: 'Mise',
+      placeholder: '€',
+      input_html:{class:'my_input'}%>
 
-      <%= f.button :button, "Partagez", type: :submit, class: :'btn btn-treehouse btn-sm' %>
-      <% end %>
+      <div class="form-group">
+        <input type="checkbox" id="deadline-checkbox" onclick="showDeadline()"> Programmer une fin de pari
+      </div>
+      <div class="hidden" id="deadline">
+        <%= f.input :dead_line,
+        label: 'Date de fin de pari',
+        input_html: {class:'my_input'},
+        html5: true%>
+      </div>
 
-    </div>
-  </div>
-</div>
+      <%= f.input :title,
+      label: "Invitez des Betyers"%>
+
+      <h4>Type de jeu</h4>
+      <br>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <%= f.button :button,
+          "Gagnant/Perdant",
+          type: :submit, id: "winner",
+          class: :'btn-box'
+            %>
+          </div>
+          <div class="col-xs-6">
+            <%= f.button :button,
+            "Classement",
+            type: :submit, id: "ranking",
+            class: :'btn-box' %>
+          </div>
+        </div>
+        <p class="hidden" id="explication">"Le ou les gagnants se partage(-ent) les gains de façon équivalente"</p>
+        <p class="hidden" id="calcul"> "Calcul dégressif"</p>
+
+        <div class="row">
+          <%= f.button :button,
+          "Lancez le pari",
+          type: :submit,
+          class: :'btn btn-bety-red btn-sm'
+           %>
+         </div>
+         <% end %>
+       </div>
+     </div>
+   </div>
+
+
+<script>
+  function showDeadline() {
+    var checkBox = document.getElementById("deadline-checkbox");
+    var input = document.getElementById("deadline");
+    if (checkBox.checked == true){
+      input.classList.remove("hidden");
+    } else {
+     input.classList.add("hidden");
+   }
+ }
+
+ var winnerBtn = document.getElementById("winner");
+ var winnerBtnExplainations = document.getElementById("explication");
+
+ var rankingBtn = document.getElementById("ranking");
+ var simulation = document.getElementById("calcul");
+
+ winnerBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    if (!simulation.classList.contains('hidden')) {
+      simulation.classList.add('hidden');
+    }
+
+    if (rankingBtn.classList.contains('btn-box-click')) {
+      rankingBtn.classList.remove('btn-box-click');
+      rankingBtn.classList.add('btn-box');
+    }
+
+    winnerBtnExplainations.classList.toggle("hidden");
+
+    winnerBtn.classList.toggle("btn-box");
+    winnerBtn.classList.toggle("btn-box-click");
+  });
+
+rankingBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    if (!winnerBtnExplainations.classList.contains('hidden')) {
+      winnerBtnExplainations.classList.add('hidden');
+    }
+
+    if (winnerBtn.classList.contains('btn-box-click')) {
+      winnerBtn.classList.remove('btn-box-click');
+      winnerBtn.classList.add('btn-box');
+    }
+
+    simulation.classList.toggle("hidden");
+
+    rankingBtn.classList.toggle("btn-box");
+    rankingBtn.classList.toggle("btn-box-click");
+  });
+
+
+</script>
+
+
+
+
