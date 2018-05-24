@@ -39,4 +39,5 @@ class User < ApplicationRecord
   # validates :bets, uniqueness: { scope: :game,
   #   message: "should bet only one time per game" }
 
+  mount_uploader :photo, PhotoUploader
 end
