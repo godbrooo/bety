@@ -45,14 +45,33 @@ def show
   @game = Game.find(params[:id])
 end
 
+
+
+def winners
+  @game = Game.find(params[:id])
+  # raise
+end
+
+def close
+  raise
+  @game = Game.find(params[:id])
+  @game.bets.each do |bet|
+    # prize = Prize.new(winner_params)
+  end
+
+end
+
+
+
+
 private
 
 def game_params
  params.require(:game).permit(:title, :description, :price, :dead_line, :photo)
 end
 
-def user_params
- params.require(:user).permit(:email)
+def winner_params
+ params.require(:prize).permit(:ranking, :reward, :game, :user)
 end
 
 

@@ -1,0 +1,18 @@
+
+
+
+<%= simple_form_for Prize.new, url: winners_path, method: :patch do |f| %>
+<% @game.bets.each do |bet| %>
+<%= bet.user.email %>
+<%= f.hidden_field :user, value: bet.user %>
+<%= f.hidden_field :game, value: @game %>
+<%= f.input :ranking %>
+<% end %>
+<%= f.submit "Fermer le pari et lancer les paiments" %>
+<% end %>
+
+
+
+<% @game.bets.each do |bet| %>
+<%= bet.user.email %>
+<% end %>
