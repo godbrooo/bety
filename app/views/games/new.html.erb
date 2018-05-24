@@ -7,8 +7,8 @@
       <%= f.input :description, placeholder: 'RDV chez moi à partir de 21h', input_html:{class:'my_input'}%>
       <%= f.input :price, placeholder: '€', input_html:{class:'my_input'}%>
       <%= f.input :dead_line, placeholder: '18/06/18', input_html:{class:'my_input'}%>
-      <%= f.input :photo, input_html:{class:'my_input'}%>
-      <%= f.input :photo, as: :hidden %>
+      <%= f.input :photo %>
+      <%=f.input :photo_cache, as: :hidden %>
 
       <%= f.button :button, "Partagez", type: :submit, class: :'btn btn-treehouse btn-sm' %>
       <% end %>

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.4.3'
 
 gem 'postmark-rails'
+
 gem 'devise'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'figaro'
@@ -18,6 +19,9 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+
+gem 'carrierwave', '~> 1.2'
+gem 'cloudinary'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
