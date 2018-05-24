@@ -14,9 +14,7 @@ module Beti
       generate.helper false
       generate.test_framework  :test_unit, fixture: false
 
-      config.action_mailer.delivery_method = :postmark
-      config.action_mailer.postmark_settings = { :api_token => "9483482c-461e-4711-beee-a12c47607acf" }
-      config.action_mailer.default_url_options = { host: "betiwagon.herokuapp.com" }
+
     end
 
     # Initialize configuration defaults for originally generated Rails version.
