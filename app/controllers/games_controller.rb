@@ -9,7 +9,7 @@ class GamesController < ApplicationController
   end
 
   def create
-  # raise
+  # binding.pry
     @game = Game.new(game_params)
     @bet = Bet.new
     @bet.user = current_user
