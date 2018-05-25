@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :games, only: [ :new, :create, :show, :index ]
 
   resources :bets, only: [:show, :index]
-  patch 'bets/:id/', to: 'bets#participate', as: :participate
-  patch 'bets/:id/', to: 'bets#denied' , as: :denied
+  patch 'bets/:id/participate', to: 'bets#participate', as: :participate
+  patch 'bets/:id/deny', to: 'bets#denied' , as: :denied
 
 
   get 'games/:id/invite', to: 'games#invite', as: :invite
