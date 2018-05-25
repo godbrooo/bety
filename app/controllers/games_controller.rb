@@ -52,7 +52,7 @@ def winners
   @game.prizes.build
 
   @ranking_possibilities = if @game.winner?
-    [0,1]
+    [["Perdant", 0],["Gagnant", 1]]
   else
     [0,1,2,3]
   end
@@ -61,24 +61,24 @@ def winners
 end
 
 def close
-  raise
+  # raise
   @game = Game.find(params[:id])
-  @game.bets.each do |bet|
-    prize = Prize.new(winner_params)
-  end
-
+  # @game = Game.new
+  # @game.prizes.build
+  @game.update_attributes(game_params)
+  raise
 end
-
-
+# @place.update_attributes(place_params)
+# >>  params["game"][:prizes_attributes]["0"][:ranking]
 
 
 private
 
 def game_params
- params.require(:game).permit(:title, :description, :price, :dead_line, :photo)
+ params.require(:game).permit(:id, :title, :description, :price, :dead_line, :photo, prizes_attributes: [:ranking, :reward, :game, :user])
 end
 
-def winner_params
+def prize_params
  params.require(:prize).permit(:ranking, :reward, :game, :user)
 end
 

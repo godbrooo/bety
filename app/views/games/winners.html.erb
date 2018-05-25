@@ -1,8 +1,12 @@
 <%= simple_form_for @game, url: winners_path, method: :patch do |f| %>
+   <% @game.bets.each do |bet| %>
  <%= f.simple_fields_for :prizes do |pr| %>
-    <%= pr.input :user, value: bet.user %>
-    <%= pr.input :ranking, collection: @ranking_possibilities %>
+     <%= bet.user.email %>
+     <%= pr.association :user, as: :hidden, input_html: {value: bet.user} %>
+     <%= pr.input :ranking, collection: @ranking_possibilities %>
+   <% end %>
  <% end %>
+ <%= f.submit "Fermer le pari et lancer les paiments" %>
 <% end %>
 
 
@@ -19,21 +23,3 @@
 
 
 
-
-
-
-<%= simple_form_for Prize.new, url: winners_path, method: :patch do |f| %>
-<% @game.bets.each do |bet| %>
-<%= bet.user.email %>
-<%= f.hidden_field :user, value: bet.user %>
-<%= f.hidden_field :game, value: @game %>
-<%= f.input :ranking %>
-<% end %>
-<%= f.submit "Fermer le pari et lancer les paiments" %>
-<% end %>
-
-
-
-<% @game.bets.each do |bet| %>
-<%= bet.user.email %>
-<% end %>
