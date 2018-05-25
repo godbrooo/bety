@@ -66,7 +66,6 @@ def close
   # @game = Game.new
   # @game.prizes.build
   @game.update_attributes(game_params)
-  raise
   redirect_to resume_path(@game)
 end
 # @place.update_attributes(place_params)
@@ -93,4 +92,4 @@ end
 
 
 
-end
+
