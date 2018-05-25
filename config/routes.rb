@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'games/:id/winners', to: 'games#winners', as: :winners
   patch 'games/:id/winners', to: 'games#close'
 
+  get 'games/:id/resume_', to: 'games#resume_challenge', as: :resume
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 

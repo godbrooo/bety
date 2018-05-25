@@ -67,9 +67,18 @@ def close
   # @game.prizes.build
   @game.update_attributes(game_params)
   raise
+  redirect_to resume_path(@game)
 end
 # @place.update_attributes(place_params)
 # >>  params["game"][:prizes_attributes]["0"][:ranking]
+
+# def resume_challenge
+#   @game = Game.find(params[:id])
+#   @total_reward = @game.bet.ongoing.count * @game.price
+#   @game.bet.ongoing.each do |beter|
+#     beter.reward = @total_reward / (@game.prizes(WHERE ranking = 1))
+#   end
+end
 
 
 private
