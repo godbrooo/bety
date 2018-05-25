@@ -1,6 +1,9 @@
 class BetsController < ApplicationController
   def index
-    @bets = Bet.all
+    @bets_pending = current_user.bets.pending
+    @bets_ongoing = current_user.bets.ongoing
+    @bets_closed = current_user.bets.closed
+
 
   end
   def show

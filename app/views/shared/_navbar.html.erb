@@ -1,4 +1,4 @@
-<div class="hidden-xs hidden-sm">
+<div class="hidden-xs ">
 <div class="navbar-wagon">
   <!-- Logo -->
 
@@ -13,7 +13,7 @@
     <% if user_signed_in? %>
 
       <!-- Links when logged in -->
-      <%= link_to "Games ongoing", games_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Games ongoing", bets_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "Create a game", new_game_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
 
@@ -46,7 +46,8 @@
   </div>
 </div>
   <!-- Dropdown list appearing on mobile only -->
-  <div class="navbar-mobile hidden-md hidden-lg">
+  <div class="navbar-mobile hidden-sm hidden-md hidden-lg">
+    <div class="container">
     <div class="mobile-H1">
 
     <div class="dropdown">
@@ -60,6 +61,7 @@
         <li><a href="#">Other one</a></li>
         <li><a href="#">Other one</a></li>
       </ul>
+    </div>
     </div>
     </div>
 

@@ -1,9 +1,126 @@
-<% current_user.bets.each do |bet| %>
-<ul>
-  <li>
-    <%= bet.game.title %>
-  </li>
-</ul>
 
-<br>
-<% end %>
+
+<div class="container">
+
+
+ <div class=" col-sm-offset-3 col-sm-6 col-xs-12">
+
+
+<div class="text-center">
+
+
+    <%= cl_image_tag current_user.photo, class: "card-user-big" %>
+  </div>
+
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"> <p> A valider</p></a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Encours</a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Terminé</a></li>
+
+  </ul>
+
+  </div>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+
+
+
+
+    <div class=" col-sm-offset-3 col-sm-6 col-xs-12">
+
+
+      <% @bets_pending.each do |bet| %>
+
+
+
+        <div class="card">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path bet.game.photo, crop: :fill%>');"">
+
+            <div class="card-description"><h2><%= bet.game.title %></h2></div>
+
+            <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
+
+          </div>
+            <div class="card-footer">
+              <p><%= bet.game.description %> </p>
+              <p><%= "#{bet.game.price}€/personne"%></p>
+            </div>
+
+
+      </div>
+       <% end %>
+    </div>
+
+  <!-- <a class="card-link" href="#" ></a> -->
+
+  </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+      <div class=" col-sm-offset-3 col-sm-6 col-xs-12">
+
+
+      <% @bets_ongoing.each do |bet| %>
+
+
+
+        <div class="card">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path bet.game.photo, crop: :fill%>');"">
+
+            <div class="card-description"><h2><%= bet.game.title %></h2></div>
+
+            <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
+
+          </div>
+            <div class="card-footer">
+              <p><%= bet.game.description %> </p>
+              <p><%= "#{bet.game.price}€/personne"%></p>
+            </div>
+
+
+      </div>
+       <% end %>
+    </div>
+
+  <!-- <a class="card-link" href="#" ></a> -->
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="messages">
+      <div class=" col-sm-offset-3 col-sm-6 col-xs-12">
+
+
+      <% @bets_closed.each do |bet| %>
+
+
+
+        <div class="card">
+          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path bet.game.photo, crop: :fill%>');"">
+
+            <div class="card-description"><h2><%= bet.game.title %></h2></div>
+
+            <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
+
+          </div>
+            <div class="card-footer">
+              <p><%= bet.game.description %> </p>
+              <p><%= "#{bet.game.price}€/personne"%></p>
+            </div>
+
+
+      </div>
+       <% end %>
+    </div>
+
+  <!-- <a class="card-link" href="#" ></a> -->
+    </div>
+
+  </div>
+
+</div>
+
+
+</div>
+
