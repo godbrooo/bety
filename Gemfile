@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 ruby '2.4.3'
 
+gem 'postmark-rails'
+
 gem 'devise'
+gem 'devise_invitable', '~> 1.7.0'
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
@@ -23,6 +26,7 @@ gem 'cloudinary'
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'annotate'
+  gem "letter_opener_web"
 end
 
 group :development, :test do
