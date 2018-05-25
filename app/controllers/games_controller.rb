@@ -49,6 +49,14 @@ end
 
 def winners
   @game = Game.find(params[:id])
+  @game.prizes.build
+
+  @ranking_possibilities = if @game.winner?
+    [0,1]
+  else
+    [0,1,2,3]
+  end
+
   # raise
 end
 
@@ -56,7 +64,7 @@ def close
   raise
   @game = Game.find(params[:id])
   @game.bets.each do |bet|
-    # prize = Prize.new(winner_params)
+    prize = Prize.new(winner_params)
   end
 
 end
