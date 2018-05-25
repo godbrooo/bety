@@ -2,7 +2,7 @@
    <% @game.bets.each do |bet| %>
  <%= f.simple_fields_for :prizes do |pr| %>
      <%= bet.user.email %>
-     <%= pr.association :user, as: :hidden, input_html: {value: bet.user} %>
+     <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
      <%= pr.input :ranking, collection: @ranking_possibilities %>
    <% end %>
  <% end %>

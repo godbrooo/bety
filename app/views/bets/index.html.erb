@@ -43,7 +43,9 @@
                style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
 
             <div class="card-description">
-              <h2><%= bet.game.title%></h2>
+            <h2><%= link_to bet.game.title, bet_path(bet) %>
+
+              </h2>
 
             </div>
 
