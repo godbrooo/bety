@@ -31,7 +31,11 @@
       label: "Invitez des Betyers"%>
 
       <h4>Type de jeu</h4>
-
+      <div class="hidden">
+        <%= f.input :category,
+             label: 'Type de jeu',
+             collection: Game.categories.keys, as: :radio_buttons %>
+      </div>
       <div class="row">
         <div class="col-xs-6">
           <%= f.button :button,
@@ -39,12 +43,20 @@
           type: :submit, id: "winner",
           class: :'btn-box'
             %>
+
+         <!--  <%# f.input :custom_field, :status => true do
+         check_box_tag (:status, value = 0)%> -->
+
           </div>
           <div class="col-xs-6">
             <%= f.button :button,
             "Classement",
             type: :submit, id: "ranking",
             class: :'btn-box' %>
+
+    <!--        <%# f.input :custom_field, :status => true do
+          check_box_tag (:status, value = 1)%> -->
+
           </div>
         </div>
         <p class="hidden" id="explication">"Le ou les gagnants se partage(-ent) les gains de façon équivalente"</p>
@@ -60,7 +72,7 @@
             <tbody>
               <tr>
                 <th scope="row">1</th>
-                <td>Jos</td>
+                <td>Josi</td>
                 <td>50%</td>
               </tr>
               <tr>
@@ -86,7 +98,9 @@
           type: :submit,
           class: :'btn btn-bety-red btn-sm'%>
          </div>
+
          <% end %>
+
        </div>
      </div>
 
@@ -103,7 +117,8 @@
      input.classList.add("hidden");
    }
  }
-
+ var radiowinner= document.getElementById("game_category_winner")
+ var radioranking= document.getElementById("game_category_ranking")
  var winnerBtn = document.getElementById("winner");
  var winnerBtnExplainations = document.getElementById("explication");
 
@@ -126,6 +141,7 @@
 
     winnerBtn.classList.toggle("btn-box");
     winnerBtn.classList.toggle("btn-box-click");
+    radiowinner.checked = true;
   });
 
 rankingBtn.addEventListener("click", function (event) {
@@ -144,6 +160,8 @@ rankingBtn.addEventListener("click", function (event) {
 
     rankingBtn.classList.toggle("btn-box");
     rankingBtn.classList.toggle("btn-box-click");
+    radioranking.checked = true;
+
 
     var y = window.innerHeight;
     window.scroll({top: y, behavior: "smooth"});

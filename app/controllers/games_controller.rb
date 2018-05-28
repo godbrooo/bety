@@ -22,6 +22,14 @@ class GamesController < ApplicationController
       end
   end
 
+  def ongoing
+    @game.ongoing!
+  end
+
+  def closed
+    @game.closed!
+  end
+
 
 def invite; end
 
@@ -108,7 +116,7 @@ private
 
 
 def game_params
- params.require(:game).permit(:id, :title, :description, :price, :dead_line, :photo, prizes_attributes: [:ranking, :reward, :game, :user_id])
+ params.require(:game).permit(:id, :title, :description, :price, :dead_line,:category,:status, :photo, prizes_attributes: [:ranking, :reward, :game, :user_id])
 end
 
 
