@@ -5,8 +5,14 @@ Rails.application.routes.draw do
   resources :games, only: [ :new, :create, :show, :index ]
 
   resources :bets, only: [:show, :index]
+
   patch 'bets/:id/participate', to: 'bets#participate', as: :participate
   patch 'bets/:id/deny', to: 'bets#denied' , as: :denied
+  patch 'bets/:id/close_bets', to: 'bets#close_bets' , as: :close_bets
+
+  patch 'bet/show/ongoing',to: 'games#ongoing', as: :game_ongoing
+  patch 'bet/show/closed',to: 'games#closed', as: :game_closed
+
 
 
   get 'games/:id/invite', to: 'games#invite', as: :invite

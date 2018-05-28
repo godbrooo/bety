@@ -12,10 +12,10 @@
 .navbar-mobile {
   // background: #D42828;
   transition: all 0.3s ease;
-  height: 30px;
-  padding: 0px 30px;
+  height: 40px;
+  // padding: 0px 30px;
   position: absolute;
-  right: 10px;
+  // right: 10px;
   display: flex;
   justify-content: space-between;
 }
@@ -84,4 +84,9 @@
   transform: rotate(45deg);
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
+}
+
+.fas {
+  color: lightgray;
+  font-size: 35px;
 }

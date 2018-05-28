@@ -1,4 +1,4 @@
-<div class="hidden-xs ">
+<!-- <div class="hidden-xs ">
 
   <h1>Pages#home</h1>
   <p>Find me in app/views/pages/home.html.erb</p>
@@ -6,7 +6,7 @@
 </div>
 
 
-<div class="hidden-sm hidden-md hidden-lg">
+<div class="hidden-sm hidden-md hidden-lg"> -->
   <div class="mobile-background">
     <div class="mobile-contain">
       <div class="mobile-H1">
@@ -17,7 +17,7 @@
         <% if user_signed_in?%>
         <div class="banner-mobile"></div>
       <h1>BETY</h1>
-      <div>Tes paris entre amis</div>
+      <h3>Tes paris entre amis</h3>
 
 
       <%= link_to new_game_path do %>
@@ -29,8 +29,9 @@
 
       <% end %>
       <% end %>
+      <br>
       <div class="mobile-H1">
-       <div>Touche BETY pour créer un pari</div>
+       <p>Touche BETY pour créer un pari</p>
      </div>
      <div class="banner-mobile">
       <%= link_to "Mes paris en cours", bets_path, class: "btn btn-bety-primary " %>

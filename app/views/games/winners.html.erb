@@ -1,4 +1,5 @@
 
+
  <h4>Définir la répartition :</h4>
 
 <div class="container">
@@ -6,8 +7,7 @@
     <div class="col-xs-12 col-sm-4 col-sm-offset-4 ">
 
       <p><%= "#{@game.price}€/personne"%></p>
-      <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @game.photo, crop: :fill%>');"">
-
+      <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= @game.photo.present? ? cl_image_path(@game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
         <div class="card-description">
           <h2><%= @game.title %></h2>
         </div>
@@ -39,6 +39,7 @@
       <% end %>
     </div>
   </div>
+
 
 </div>
 

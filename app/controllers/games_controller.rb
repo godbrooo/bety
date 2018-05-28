@@ -16,10 +16,19 @@ class GamesController < ApplicationController
     @bet.challenger = true
     @bet.game = @game
       if @game.save && @bet.save
+       @bet.ongoing!
        redirect_to invite_path(@game)
       else
        render :new
       end
+  end
+
+  def ongoing
+    @game.ongoing!
+  end
+
+  def closed
+    @game.closed!
   end
 
 
@@ -31,47 +40,67 @@ def invite; end
     @game = Game.find(params[:id])
     email = params[:user][:email]
     user = User.invite!(email: email)
-    bet = Bet.new(user: user, game: @game, status: "pending", challenger: false)
+    bet = Bet.new(user: user, game: @game, challenger: false)
       if bet.save
-        redirect_to game_path(@game)
+        redirect_to bet_path(bet)
+        bet.pending!
       else
         render :invite
       end
   end
 
   def show
+
     @game = Game.find(params[:id])
   end
 
 
 
   def winners
-    @game = Game.find(params[:id])
+    bet = Bet.find(params[:id])
+    @game = bet.game
     @game.prizes.build
 
     @ranking_possibilities = if @game.winner?
       [["Perdant", 0],["Gagnant", 1]]
     else
-      [0,1,2,3]
+      # [0,1,2,3]
+      [["Perdant", 0] ,["1er",1] ,["2nd",2], ["3ème", 3]]
     end
   end
   # raise
 
 
 def close
-  @game = Game.find(params[:id])
-  # @game = Game.new
+  bet = Bet.find(params[:id])
+  @game = bet.game
+
   # @game.prizes.build
+
   if @game.update(game_params)
     @total_reward = @game.bets.ongoing.count * @game.price
     success = true
     prizes = @game.prizes.where(ranking:(1..3))
 
-    prizes.each do |prize|
-      prize.reward = @total_reward / prizes.count
-      success = false unless prize.save
-    end
 
+    if @game.winner?
+      prizes.each do |prize|
+        prize.reward = @total_reward / prizes.count
+        success = false unless prize.save
+      end
+    elsif @game.ranking?
+      binding.pry
+       premier_prix = prizes.where(ranking: 1)
+       premier_prix.first.reward = @total_reward.to_f * (0.5)
+
+       second_prix = prizes.where(:ranking => 2)
+       second_prix.first.reward = @total_reward.to_f * (0.2)
+
+       troisieme_prix = prizes.where(:ranking => 3)
+       troisieme_prix.first.reward = @total_reward.to_f * (0.1)
+    end
+ # raise
+    @game.closed!
     if success
       redirect_to resume_path
     else
@@ -87,7 +116,16 @@ end
 # >>  params["game"][:prizes_attributes]["0"][:ranking]
 
 def resume_challenge
+
   @game = Game.find(params[:id])
+  @bets = @game.bets
+  @bets.each do |bet|
+    if bet.user == current_user
+      redirect_to bet_path(bet)
+    end
+  end
+  # redirect_to bet_path(@bets.first)
+
 end
 
 # @place.update_attributes(place_params)
@@ -107,7 +145,7 @@ private
 
 
 def game_params
- params.require(:game).permit(:id, :title, :description, :price, :dead_line, :photo, prizes_attributes: [:ranking, :reward, :game, :user_id])
+ params.require(:game).permit(:id, :title, :description, :price, :dead_line,:category,:status, :photo, prizes_attributes: [:ranking, :reward, :game, :user_id])
 end
 
 
@@ -115,6 +153,6 @@ end
     params.require(:prize).permit(:ranking, :reward, :game, :user)
   end
 
-
-
 end
+
+
