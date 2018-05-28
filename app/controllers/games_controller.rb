@@ -74,7 +74,6 @@ def invite; end
 def close
   bet = Bet.find(params[:id])
   @game = bet.game
-
   # @game.prizes.build
 
   if @game.update(game_params)
@@ -89,7 +88,6 @@ def close
         success = false unless prize.save
       end
     elsif @game.ranking?
-      binding.pry
        premier_prix = prizes.where(ranking: 1)
        premier_prix.first.reward = @total_reward.to_f * (0.5)
 

@@ -1,12 +1,10 @@
 
 
- <h4>Définir la répartition :</h4>
-
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-sm-offset-4 ">
-
-      <p><%= "#{@game.price}€/personne"%></p>
+      <p>La mise à répartir : <%= "#{@game.price}€"%></p>
+      </%>
       <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= @game.photo.present? ? cl_image_path(@game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
         <div class="card-description">
           <h2><%= @game.title %></h2>
@@ -20,24 +18,29 @@
 
       <br>
       <%= simple_form_for @game, url: winners_path, method: :patch do |f| %>
-      <p>Répartition en Gagnant/Perdant</p>
-      <% @game.bets.each_with_index do |bet, index| %>
-        <%= f.simple_fields_for :prizes do |pr| %>
-      <div style="display: flex">
-        <%= cl_image_tag bet.user.photo.url, height: 100, width: 170  %>
-
-        <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
-        <%= pr.input :ranking,
-              collection: @ranking_possibilities,
-              as: :boolean,
-              input_html: {class:"hidden"},
-              label: false
-               %>
-          <button class="buttons btn-box" data-checkbox= "game_prizes_attributes_<%= index + 1  %>_ranking"> Winner</button>
-      </div>
-      <% end %>
-      <% end %>
-      <%= f.submit "Fermer le pari et lancer les paiements", class: :'btn btn-bety-red btn-sm' %>
+        <p>Répartition au format Gagnant/Perdant :</p>
+        <% @game.bets.each_with_index do |bet, index| %>
+          <%= f.simple_fields_for :prizes do |pr| %>
+            <div style="display: flex">
+              <%= bet.user.photo.present? ? cl_image_tag(bet.user.photo.url, height: 100, width: 170) : image_tag("challenge.jpeg") %>
+              <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
+              <%= pr.input :ranking,
+                    collection: @ranking_possibilities,
+                    as: :boolean,
+                    input_html: {
+                      class:"hidden",
+                      value: 0,
+                    },
+                    label: false %>
+              <button
+                class="buttons btn-box"
+                data-checkbox= "game_prizes_attributes_<%= index  %>_ranking">
+                  Winner
+              </button>
+            </div>
+          <% end %>
+        <% end %>
+        <%= f.submit "Fermer le pari et lancer les paiements", class: :'btn btn-bety-red btn-sm' %>
       <% end %>
     </div>
   </div>
@@ -48,12 +51,14 @@
 <script>
 
   var buttons = document.querySelectorAll('.buttons');
-  buttons.forEach(function(button){
-    button.addEventListener('click', function(e){
-      console.log(e)
+
+  buttons.forEach(function(button) {
+    button.addEventListener('click', function(e) {
+      console.log(e.target)
       e.preventDefault();
       var checkbox = document.getElementById(this.dataset.checkbox);
       this.classList.toggle("btn-box-click")
+
       if (checkbox.checked) {
         checkbox.checked = false;
       } else {
