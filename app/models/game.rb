@@ -21,4 +21,5 @@ class Game < ApplicationRecord
   enum status: [ :pending, :ongoing, :closed]
   enum category: [ :winner, :ranking]
   accepts_nested_attributes_for :prizes, reject_if: :all_blank, allow_destroy: true
+  validates :title, presence: true
 end

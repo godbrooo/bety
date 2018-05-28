@@ -89,15 +89,17 @@ def close
         success = false unless prize.save
       end
     elsif @game.ranking?
-      binding.pry
+      # binding.pry
        premier_prix = prizes.where(ranking: 1)
        premier_prix.first.reward = @total_reward.to_f * (0.5)
 
        second_prix = prizes.where(:ranking => 2)
        second_prix.first.reward = @total_reward.to_f * (0.2)
 
+      if prizes.where(:ranking => 3).exists?
        troisieme_prix = prizes.where(:ranking => 3)
        troisieme_prix.first.reward = @total_reward.to_f * (0.1)
+      end
     end
  # raise
     @game.closed!
@@ -116,14 +118,15 @@ end
 # >>  params["game"][:prizes_attributes]["0"][:ranking]
 
 def resume_challenge
-
-  @game = Game.find(params[:id])
+  bet = Bet.find(params[:id])
+  @game = bet.game
   @bets = @game.bets
+  @game.closed!
   @bets.each do |bet|
-    if bet.user == current_user
-      redirect_to bet_path(bet)
-    end
+    bet.closed!
+
   end
+  redirect_to bet_path(bet)
   # redirect_to bet_path(@bets.first)
 
 end
