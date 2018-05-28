@@ -35,8 +35,30 @@
 
 
   <div class="row">
+
+
+       <% if @bet.status =="closed" %>
+
+
+          <ul>
+          <% @bet.game.prizes.each do |prize| %>
+          <div class="col-xs-12 text-center">
+
+          <li>
+
+
+          <%= cl_image_tag prize.user.photo, class: "card-user" %>
+
+          <%= "#{prize.user.email} a gagné #{prize.reward}€ car il est #{prize.ranking}" %>
+          </li>
+          <% end %>
+
+          </ul>
+        </div>
     <div class="col-xs-6 text-center">
-      <% if @bet.game.bets.find_by(challenger: true).user == current_user %>
+
+
+      <% elsif @bet.game.bets.find_by(challenger: true).user == current_user %>
 
       <%= button_to "Fermer les paris", close_bets_path,
       method: :patch,
