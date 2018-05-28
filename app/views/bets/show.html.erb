@@ -8,7 +8,9 @@
 
 
   <div class="card">
+
     <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= @bet.game.photo.present? ? cl_image_path(@bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');"">
+
 
       <div class="card-description">
         <h2><%= @bet.game.title %>
@@ -32,22 +34,49 @@
 
 
 
-<div class="row">
-  <div class="col-xs-6 text-center">
+  <div class="row">
+    <div class="col-xs-6 text-center">
+      <% if @bet.game.bets.find_by(challenger: true).user == current_user %>
 
-  <%= button_to "Participer", participate_path(@bet),
-        method: :patch,
-          class: 'btn btn-bety-red btn-sm'%>
+      <%= button_to "Fermer les paris", close_bets_path,
+      method: :patch,
+      class: 'btn btn-bety-red btn-sm'%>
+    </div>
+    <div class="col-xs-6 text-center">
+      <%= button_to "Fin et attribution des prix", winners_path,
+      method: :get,
+      class: 'btn btn-bety-red btn-sm'%>
+
+      <% else %>
+          <% if @bet.game.status == "ongoing"%>
+          <h1>Les paris sont clos</h1>
+
+          <%elsif @bet.status == "ongoing"%>
+
+          <div class="col-xs-12 text-center">
+
+            <%= button_to "Refuser", denied_path(@bet),
+            method: :patch,
+            class: 'btn btn-bety-red btn-sm'%>
+          </div>
+
+          <% else %>
+          <div class="col-xs-6 text-center">
+            <%= button_to "Participer", participate_path(@bet),
+            method: :patch,
+            class: 'btn btn-bety-red btn-sm'%>
+          </div>
+
+          <div class="col-xs-6 text-center">
+
+            <%= button_to "Refuser", denied_path(@bet),
+            method: :patch,
+            class: 'btn btn-bety-red btn-sm'%>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <div class="col-xs-6 text-center">
-
-<%= button_to "Refuser", denied_path(@bet),
-        method: :patch,
-          class: 'btn btn-bety-red btn-sm'%>
-  </div>
-     </div>
-   </div>
 </div>
 <!--
 <script>
@@ -95,4 +124,4 @@ rankingBtn.addEventListener("click", function (event) {
 
 </script>
 
- -->
+-->

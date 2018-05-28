@@ -16,9 +16,9 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
 
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"> <p> A valider</p></a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Encours</a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Terminés</a></li>
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><h6>A valider</h6></a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><h6>Encours</h6></a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><h6>Terminés</h6></a></li>
 
   </ul>
 
@@ -115,7 +115,7 @@
             </div>
 
 
-          <%= cl_image_tag challenge.jpeg, class: "card-user" %>
+          <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
 
 
 
