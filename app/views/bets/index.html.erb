@@ -8,8 +8,8 @@
 
 <div class="text-center">
 
+    <img src=<%= current_user.photo_url ? cl_image_path(current_user.photo, crop: :fill) : image_path("logo.png", crop: :fill) %> class="card-user-big" >
 
-    <%= cl_image_tag current_user.photo, class: "card-user-big" %>
   </div>
 
 
