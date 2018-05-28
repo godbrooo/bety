@@ -48,13 +48,15 @@ def invite; end
   end
 
   def show
+
     @game = Game.find(params[:id])
   end
 
 
 
   def winners
-    @game = Game.find(params[:id])
+    bet = Bet.find(params[:id])
+    @game = bet.game
     @game.prizes.build
 
     @ranking_possibilities = if @game.winner?
@@ -67,8 +69,9 @@ def invite; end
 
 
 def close
-  @game = Game.find(params[:id])
-  # @game = Game.new
+  bet = Bet.find(params[:id])
+  @game = bet.game
+
   # @game.prizes.build
 
   if @game.update(game_params)
@@ -96,7 +99,8 @@ end
 # >>  params["game"][:prizes_attributes]["0"][:ranking]
 
 def resume_challenge
-  @game = Game.find(params[:id])
+ bet = Bet.find(params[:id])
+    @game = bet.game
 end
 
 # @place.update_attributes(place_params)
