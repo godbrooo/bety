@@ -1,14 +1,46 @@
-<%= simple_form_for @game, url: winners_path, method: :patch do |f| %>
-   <% @game.bets.each do |bet| %>
- <%= f.simple_fields_for :prizes do |pr| %>
-     <%= bet.user.email %>
-     <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
-     <%= pr.input :ranking, collection: @ranking_possibilities %>
-   <% end %>
- <% end %>
- <%= f.submit "Fermer le pari et lancer les paiments" %>
-<% end %>
 
+ <h4>Définir la répartition :</h4>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4 ">
+
+      <p><%= "#{@game.price}€/personne"%></p>
+      <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path @game.photo, crop: :fill%>');"">
+
+        <div class="card-description">
+          <h2><%= @game.title %></h2>
+        </div>
+
+        <%= cl_image_tag @game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
+
+      </div>
+
+      <div class="card-footer">
+
+      <br>
+      <%= simple_form_for @game, url: winners_path, method: :patch do |f| %>
+      <p>Répartition en Gagnant/Perdant</p>
+      <% @game.bets.each do |bet| %>
+        <%= f.simple_fields_for :prizes do |pr| %>
+
+        <%= bet.user.email %>
+        <%= cl_image_tag bet.user.photo.url, class:'card-user' %>
+
+        <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
+        <%= pr.input :ranking,
+              collection: @ranking_possibilities,
+              as: :radio_buttons,
+              label: ""
+               %>
+      <% end %>
+      <% end %>
+      <%= f.submit "Fermer le pari et lancer les paiements", class: :'btn btn-bety-red btn-sm' %>
+      <% end %>
+    </div>
+  </div>
+
+</div>
 
 
 
