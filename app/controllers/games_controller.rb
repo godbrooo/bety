@@ -41,7 +41,7 @@ def invite; end
     user = User.invite!(email: email)
     bet = Bet.new(user: user, game: @game, status: "pending", challenger: false)
       if bet.save
-        redirect_to game_path(@game)
+        redirect_to bet_path(bet)
       else
         render :invite
       end
@@ -60,7 +60,7 @@ def invite; end
     @ranking_possibilities = if @game.winner?
       [["Perdant", 0],["Gagnant", 1]]
     else
-      [0,1,2,3]
+      [["Perdant", 0] ,["1er",1] ,["2nd",2], ["3ème", 3]]
     end
   end
   # raise
@@ -80,7 +80,7 @@ def close
       prize.reward = @total_reward / prizes.count
       success = false unless prize.save
     end
-
+    @game.closed!
     if success
       redirect_to resume_path
     else
@@ -97,6 +97,13 @@ end
 
 def resume_challenge
   @game = Game.find(params[:id])
+  @bets = @game.bets
+  @bets.each do |bet|
+    if bet.user == current_user
+      redirect_to bet_path(bet)
+    end
+  end
+  # redirect_to bet_path(@bets.first)
 end
 
 # @place.update_attributes(place_params)
