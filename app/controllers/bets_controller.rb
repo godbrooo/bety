@@ -16,9 +16,19 @@ class BetsController < ApplicationController
     redirect_to bets_path
   end
 
-   def denied
+  def denied
     @bet = Bet.find(params[:id])
     @bet.refused!
+    redirect_to bets_path
+  end
+  def close_bets
+    @bet = Bet.find(params[:id])
+    @bet.game.ongoing!
+    @bet.game.bets.each do |bet|
+      if bet.status != "ongoing"
+      bet.refused!
+      end
+    end
     redirect_to bets_path
   end
 end
