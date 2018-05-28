@@ -62,6 +62,7 @@ def close
   @game = Game.find(params[:id])
   # @game = Game.new
   # @game.prizes.build
+
   if @game.update(game_params)
     @total_reward = @game.bets.ongoing.count * @game.price
     success = true
@@ -115,6 +116,6 @@ end
     params.require(:prize).permit(:ranking, :reward, :game, :user)
   end
 
-
-
 end
+
+
