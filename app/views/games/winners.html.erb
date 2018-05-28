@@ -21,18 +21,20 @@
       <br>
       <%= simple_form_for @game, url: winners_path, method: :patch do |f| %>
       <p>Répartition en Gagnant/Perdant</p>
-      <% @game.bets.each do |bet| %>
+      <% @game.bets.each_with_index do |bet, index| %>
         <%= f.simple_fields_for :prizes do |pr| %>
-
-        <%= bet.user.email %>
-        <%= cl_image_tag bet.user.photo.url, class:'card-user' %>
+      <div style="display: flex">
+        <%= cl_image_tag bet.user.photo.url, height: 100, width: 170  %>
 
         <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
         <%= pr.input :ranking,
               collection: @ranking_possibilities,
-              as: :radio_buttons,
-              label: ""
+              as: :boolean,
+              input_html: {class:"hidden"},
+              label: false
                %>
+          <button class="buttons btn-box" data-checkbox= "game_prizes_attributes_<%= index + 1  %>_ranking"> Winner</button>
+      </div>
       <% end %>
       <% end %>
       <%= f.submit "Fermer le pari et lancer les paiements", class: :'btn btn-bety-red btn-sm' %>
@@ -42,6 +44,23 @@
 
 </div>
 
+<script>
+
+  var buttons = document.querySelectorAll('.buttons');
+  buttons.forEach(function(button){
+    button.addEventListener('click', function(e){
+      console.log(e)
+      e.preventDefault();
+      var checkbox = document.getElementById(this.dataset.checkbox);
+      this.classList.toggle("btn-box-click")
+      if (checkbox.checked) {
+        checkbox.checked = false;
+      } else {
+        checkbox.checked = true;
+      }
+    });
+  })
+</script>
 
 
 
