@@ -1,5 +1,5 @@
 .card {
-
+  position: relative;
   flex: 1 1 auto;
   margin: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -19,6 +19,7 @@
   right: 10px;
   top: 10px;
   width: 40px;
+  height: 40px;
   border-radius: 50%;
     border-style: solid;
   border-width: 2px;
@@ -35,6 +36,7 @@
   margin: 20px;
   top: 10px;
   width: 150px;
+  height: 150px;
   border-radius: 50%;
   text-align: center;
 
