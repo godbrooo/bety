@@ -84,10 +84,11 @@ def invite; end
 
 
 def close
+
   bet = Bet.find(params[:id])
   @game = bet.game
   # @game.prizes.build
-
+  # binding.pry
   if @game.update(game_params)
     @total_reward = @game.bets.ongoing.count * @game.price
     success = true
@@ -99,18 +100,33 @@ def close
         prize.reward = @total_reward / prizes.count
         success = false unless prize.save
       end
+
     elsif @game.ranking?
 
-       premier_prix = prizes.where(ranking: 1)
-       premier_prix.first.reward = @total_reward.to_f * (0.5)
+        prizes.each do |prize|
+          if prize.ranking == 1
+            prize.reward = @total_reward * (0.5)
+          elsif prize.ranking == 2
+            prize.reward = @total_reward * (0.3)
+          elsif prize.ranking == 3
+            prize.reward = @total_reward * (0.2)
+          end
+          prize.save
 
-       second_prix = prizes.where(:ranking => 2)
-       second_prix.first.reward = @total_reward.to_f * (0.2)
 
-      if prizes.where(:ranking => 3).exists?
-       troisieme_prix = prizes.where(:ranking => 3)
-       troisieme_prix.first.reward = @total_reward.to_f * (0.1)
-      end
+
+        end
+      #  premier_prix = @total_reward * (0.5)
+      #  prizes.where(ranking: 1).first.reward = premier_prix.to_i
+
+      #  second_prix = prizes.where(:ranking => 2)
+      #  second_prix.first.reward = @total_reward * (0.2)
+      #  prizes.where(:ranking => 2).first.reward = @total_reward * (0.2)
+
+      # if prizes.where(:ranking => 3).exists?
+      #  troisieme_prix = prizes.where(:ranking => 3)
+      #  troisieme_prix.first.reward = @total_reward.to_f * (0.1)
+      # end
     end
  # raise
     @game.closed!
@@ -132,6 +148,7 @@ def resume_challenge
   bet = Bet.find(params[:id])
   @game = bet.game
   @bets = @game.bets
+  @prizes = @game.prizes
   @game.closed!
   @bets.each do |bet|
     bet.closed!
