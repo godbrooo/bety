@@ -4,7 +4,7 @@
       <%= render "email_field",user: user, id: 0%>
     </div>
 
-    <a id="addEmail">Ajouter une invitation</a>
+    <a id="addEmail", class="btn btn-bety-red btn-sm">Ajouter une invitation</a>
 
 
     <script>
@@ -23,7 +23,7 @@
      });
     </script>
   <% end %>
-  <%= f.submit "Lancer les invitations" %>
+  <%= f.submit "Lancer les invitations", class: :'btn btn-bety-red btn-sm' %>
 <% end %>
 
 
