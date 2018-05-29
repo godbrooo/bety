@@ -4,7 +4,7 @@
  <div class=" col-sm-offset-3 col-sm-6 col-xs-12">
 
 
-<div class="text-center">
+  <div class="text-center">
 
     <img src=<%= current_user.photo_url ? cl_image_path(current_user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-big" >
 
@@ -21,17 +21,30 @@
   <!-- Nav tabs -->
   <ul class="nav nav-pills" role="tablist">
 
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><p><%= @bets_pending.count %></p><h6>A valider</h6></a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><p><%= @bets_ongoing.count %></p><h6>En cours</h6></a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><p><%= @bets_closed.count %></p><h6>Terminés</h6></a></li>
-
+    <li role="presentation" class="active">
+      <a href="#home" aria-controls="home" role="tab" data-toggle="tab" class="nav-pills-left"><p><%= @bets_pending.count %></p>
+        <h6>A valider</h6>
+      </a>
+    </li>
+    <li role="presentation">
+      <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+        <p><%= @bets_ongoing.count %></p>
+        <h6>En cours</h6>
+      </a>
+    </li>
+    <li role="presentation">
+      <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+        <p><%= @bets_closed.count %></p>
+        <h6>Terminés</h6>
+      </a>
+    </li>
   </ul>
 
-  </div>
+</div>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="home">
+<!-- Tab panes -->
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="home">
 
 
 
@@ -43,29 +56,30 @@
 
 
 
-        <div class="card">
+      <div class="card">
 
-          <a href="" class=""></a>
-          <%= link_to "", bet_path(bet), class: "card-link" %>
-          <div class="card-body"
-               style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
+        <a href="" class=""></a>
+        <%= link_to "", bet_path(bet), class: "card-link" %>
+        <div class="card-body"
+        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
 
-            <div class="card-description">
-            <h2><%= link_to bet.game.title, bet_path(bet) %></h2>
+        <div class="card-description">
+          <h2><%= link_to bet.game.title, bet_path(bet) %></h2>
 
-            </div>
+        </div>
 
-            <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
-
-          </div>
-            <div class="card-footer">
-              <p><%= bet.game.description %> </p>
-              <p><%= "#{bet.game.price}€/personne"%></p>
-            </div>
-
+        <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
 
       </div>
-       <% end %>
+      <div class="card-footer">
+        <p><%= bet.game.description %> </p>
+        <p><%= "#{bet.game.price}€/personne"%></p>
+      </div>
+
+
+    </div>
+    <% end %>
+
 
       <div class="card">
       <% if @bets_pending.count == 0 %>
@@ -77,92 +91,96 @@
           </div>
         <% end %>
         </div>
+
     </div>
+  <% end %>
+</div>
 
-  <!-- <a class="card-link" href="#" ></a> -->
+<!-- <a class="card-link" href="#" ></a> -->
 
-  </div>
-    <div role="tabpanel" class="tab-pane" id="profile">
-      <div class=" col-sm-offset-3 col-sm-6 col-xs-12">
-
-
-      <% @bets_ongoing.each do |bet| %>
-
+</div>
+<div role="tabpanel" class="tab-pane" id="profile">
+  <div class=" col-sm-offset-3 col-sm-6 col-xs-12">
 
 
-        <div class="card">
-          <%= link_to "", bet_path(bet), class: "card-link" %>
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
+    <% @bets_ongoing.each do |bet| %>
+
+
+
+    <div class="card">
+      <%= link_to "", bet_path(bet), class: "card-link" %>
+      <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
+
+
 
 
             <div class="card-description">
               <h2><%= link_to bet.game.title, bet_path(bet) %>
 
-              </h2>
-            </div>
 
-            <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
-
-          </div>
-            <div class="card-footer">
-              <p><%= bet.game.description %> </p>
-              <p><%= "#{bet.game.price}€/personne"%></p>
-            </div>
-
+          </h2>
         </div>
-      <% end %>
-        <% if @bets_ongoing.count == 0 %>
-          <p>Aucun paris en cours en ce moment ! </p>
-        <% end %>
+
+        <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
+
+      </div>
+      <div class="card-footer">
+        <p><%= bet.game.description %> </p>
+        <p><%= "#{bet.game.price}€/personne"%></p>
+      </div>
+
     </div>
+    <% end %>
+    <% if @bets_ongoing.count == 0 %>
+    <p>Aucun paris en cours en ce moment ! </p>
+    <% end %>
+  </div>
 
   <!-- <a class="card-link" href="#" ></a> -->
-    </div>
+</div>
 
-    <div role="tabpanel" class="tab-pane" id="messages">
-      <div class=" col-sm-offset-3 col-sm-6 col-xs-12">
-
-
-      <% @bets_closed.each do |bet| %>
+<div role="tabpanel" class="tab-pane" id="messages">
+  <div class=" col-sm-offset-3 col-sm-6 col-xs-12">
 
 
+    <% @bets_closed.each do |bet| %>
 
-        <div class="card">
-          <%= link_to "", bet_path(bet), class: "card-link" %>
-          <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
 
-            <div class="card-description">
-              <h2><%= link_to bet.game.title, bet_path(bet) %>
-            </div>
+
+    <div class="card">
+      <%= link_to "", bet_path(bet), class: "card-link" %>
+      <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
+
+        <div class="card-description">
+          <h2><%= link_to bet.game.title, bet_path(bet) %>
+          </div>
 
 
           <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
 
 
 
-          </div>
-            <div class="card-footer">
-              <p><%= bet.game.description %> </p>
-              <p><%= "#{bet.game.price}€/personne"%></p>
-            </div>
+        </div>
+        <div class="card-footer">
+          <p><%= bet.game.description %> </p>
+          <p><%= "#{bet.game.price}€/personne"%></p>
+        </div>
 
 
       </div>
-       <% end %>
-       <% if @bets_closed.count == 0 %>
-         <p>Aucun paris terminé ! </p>
-       <% end %>
+      <% end %>
+      <% if @bets_closed.count == 0 %>
+      <p>Aucun paris terminé ! </p>
+      <% end %>
     </div>
 
-  <!-- <a class="card-link" href="#" ></a> -->
-    </div>
-
+    <!-- <a class="card-link" href="#" ></a> -->
   </div>
 
 </div>
 
-
 </div>
+
 
 
 <!-- a ranger !!!!! -->
@@ -171,14 +189,14 @@
 
 <script>
   // Javascript to enable link to tab
-var url = document.location.toString();
-if (url.match('#')) {
+  var url = document.location.toString();
+  if (url.match('#')) {
     $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
-}
+  }
 
 // Change hash for page-reload
 $('.nav-tabs a').on('shown.bs.tab', function (e) {
-    window.location.hash = e.target.hash;
+  window.location.hash = e.target.hash;
 })
 </script>
 

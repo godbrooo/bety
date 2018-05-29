@@ -5,6 +5,19 @@
   box-shadow: 0px 1px 1px 1px rgba(0, 0, 255, .2);
 }
 
-// .li-tabs {
-//   color: #d42828;
-// }
+.nav-pills > li {
+  float: left;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.nav-pills > li > a {
+    color: #d42828;
+    text-decoration: none;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  color: #fff;
+  background-color: #d42828;
+}
+
