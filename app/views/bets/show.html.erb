@@ -28,32 +28,50 @@
 
 
   </div>
-  <p><%= @bet.game.description %> </p>
+  <p><%="#{@bet.game.bets.find_by(challenger: true).user.email} vous a invité au BETY :"%></p>
+  <div class="align-center">
+  <h3><%= @bet.game.title %></h3>
+  <h5> <%= @bet.game.description  %></h5>
+  </div>
+  <h6> les invités sont</h6>
+    <ul><% @bet.game.bets.each do |bet|%></ul>
+    <ol>
+      <% if bet.status == "closed"%>
+      <% elsif bet.status == "pending"%><%= bet.user.email %><%= " n'a pas encore répondu" %>
 
+      <% elsif bet.status == "ongoing" then %><%= bet.user.email %><%= " a validé sa participation" %>
 
-
-
-
+      <% elsif bet.status == "denied" then %><%= bet.user.email %><%= " a refusé sa participation" %>
+      <% end %>
+     </ol>
+    <% end %>
 
 
 
        <% if @bet.status =="closed" %>
 
+          <div class="card">
+            <div class="card-body-winer">
+              <div class="card-footer flex">
+            <ul>
+            <% @bet.game.prizes.each do |prize| %>
 
-          <ul>
-          <% @bet.game.prizes.each do |prize| %>
-          <div class="col-xs-12 text-center">
 
-          <li>
+            <ol>
 
+            <%= cl_image_tag prize.user.photo, class: "card-user-prize" %>
+            <% if prize.reward == nil || prize.reward = 0%>
+              <%= "#{prize.user.email} a perdu" %>
+            <% else %>
+              <%= "#{prize.user.email} a gagné #{prize.reward}€" %>
+            <% end %>
+            </ol>
+            <% end %>
 
-          <%= cl_image_tag prize.user.photo, class: "card-user" %>
+            </ul>
 
-          <%= "#{prize.user.email} a gagné #{prize.reward}€ car il est #{prize.ranking}" %>
-          </li>
-          <% end %>
-
-          </ul>
+          </div>
+        </div>
       <% elsif @bet.game.bets.find_by(challenger: true).user == current_user %>
       <div class="col-xs-6 text-center">
       <%= button_to "Fermer les paris", close_bets_path,
