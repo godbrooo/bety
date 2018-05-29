@@ -34,7 +34,7 @@
 
 
 
-  <div class="row">
+
 
 
        <% if @bet.status =="closed" %>
@@ -54,19 +54,20 @@
           <% end %>
 
           </ul>
-    <div class="col-xs-6 text-center">
-
-
       <% elsif @bet.game.bets.find_by(challenger: true).user == current_user %>
-
+      <div class="col-xs-6 text-center">
       <%= button_to "Fermer les paris", close_bets_path,
       method: :patch,
       class: 'btn btn-bety-red btn-sm'%>
-    </div>
-    <div class="col-xs-6 text-center">
+      </div>
+
+      <div class="col-xs-6 text-center">
+
+
       <%= button_to "Fin et attribution des prix", winners_path,
       method: :get,
       class: 'btn btn-bety-red btn-sm'%>
+      </div>
 
       <% else %>
           <% if @bet.game.status == "ongoing"%>
