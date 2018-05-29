@@ -6,7 +6,7 @@
 
   <div class="text-center">
 
-    <img src=<%= current_user.photo_url ? cl_image_path(current_user.photo, crop: :fill) : image_path("logo.png", crop: :fill) %> class="card-user-big" >
+    <img src=<%= current_user.photo_url ? cl_image_path(current_user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-big" >
 
   </div>
 
@@ -80,10 +80,18 @@
     </div>
     <% end %>
 
-    <% if @bets_pending.count == 0 %>
 
-    <div class="gif-empty-challenge"
-    style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path("empty-state-illustrations.gif")%>');"><h1>Aucun paris à valider en ce moment !</h1>
+      <div class="card">
+      <% if @bets_pending.count == 0 %>
+
+      <p class= "text-center">Aucun paris à valider en ce moment !</p>
+
+          <div class="gif-empty-challenge"
+               style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path("empty-state-illustrations.gif")%>');">
+          </div>
+        <% end %>
+        </div>
+
     </div>
   <% end %>
 </div>
@@ -104,8 +112,11 @@
       <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
 
 
-        <div class="card-description">
-          <h2><%= link_to bet.game.description, bet_path(bet) %>
+
+
+            <div class="card-description">
+              <h2><%= link_to bet.game.title, bet_path(bet) %>
+
 
           </h2>
         </div>

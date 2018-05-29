@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :bets, only: [:show, :index]
 
-  get 'bets#profile', to: 'bets#participate', as: :betsencours
+  # get 'bets#profile', to: 'bets#participate', as: :betsencours
 
   patch 'bets/:id/participate', to: 'bets#participate', as: :participate
   patch 'bets/:id/deny', to: 'bets#denied' , as: :denied
