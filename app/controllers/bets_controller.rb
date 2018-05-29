@@ -1,23 +1,31 @@
 class BetsController < ApplicationController
   def index
+    @bets = current_user.bets
     @bets_pending = current_user.bets.pending
     @bets_ongoing = current_user.bets.ongoing
     @bets_closed = current_user.bets.closed
     @reward = 0
     current_user.prizes do |prize|
-     @reward = prize.reward + @reward
-   end
-
+      @reward = prize.reward + @reward
+    end
  end
  def show
   @bet = Bet.find(params[:id])
 end
 
-def participate
-  @bet = Bet.find(params[:id])
-  @bet.ongoing!
-  redirect_to bets_path
-end
+  end
+  def show
+    @bet = Bet.find(params[:id])
+  end
+
+  def participate
+    @bet = Bet.find(params[:id])
+    @bet.ongoing!
+    redirect_to bets_path(anchor: 'profile')
+    # redirect_to betsencours_path
+
+  end
+
 
 def denied
   @bet = Bet.find(params[:id])

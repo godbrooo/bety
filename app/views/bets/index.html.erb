@@ -10,11 +10,13 @@
 
   </div>
 
-  <h1 class="h1-index">William Hutter</h1>
+
+  <h1 class="h1-index"><%= current_user.user_name ? current_user.user_name : current_user.email %></h1>
   <h4 class="h4-index">SOMME DE MES GAINS</h4>
   <h2 class="h2-index"><%= @reward %>€</h2>
 
   <h4 class="h4-index">MES PARIS</h4>
+
 
   <!-- Nav tabs -->
   <ul class="nav nav-pills" role="tablist">
@@ -43,7 +45,7 @@
 
         <div class="card">
 
-          <a href="toto.html" class=""></a>
+          <a href="" class=""></a>
           <%= link_to "", bet_path(bet), class: "card-link" %>
           <div class="card-body"
                style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
@@ -64,6 +66,13 @@
 
       </div>
        <% end %>
+
+      <% if @bets_pending.count == 0 %>
+
+          <div class="gif-empty-challenge"
+               style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path("empty-state-illustrations.gif")%>');"><p>Aucun paris à valider en ce moment !</p>
+        </div>
+        <% end %>
     </div>
 
   <!-- <a class="card-link" href="#" ></a> -->
@@ -96,9 +105,11 @@
               <p><%= "#{bet.game.price}€/personne"%></p>
             </div>
 
-
-      </div>
-       <% end %>
+        </div>
+      <% end %>
+        <% if @bets_ongoing.count == 0 %>
+          <p>Aucun paris en cours en ce moment ! </p>
+        <% end %>
     </div>
 
   <!-- <a class="card-link" href="#" ></a> -->
@@ -133,6 +144,9 @@
 
 
       </div>
+       <% end %>
+       <% if @bets_closed.count == 0 %>
+         <p>Aucun paris terminé ! </p>
        <% end %>
     </div>
 
