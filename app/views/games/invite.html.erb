@@ -1,4 +1,30 @@
-<%= simple_form_for User.new, url: invite_path, method: :post do |f| %>
-<%= f.input :email %>
-<%= f.submit "Lancer les invitations" %>
+<%= simple_form_for :invitations, url: invite_path, method: :post do |f| %>
+  <%= f.simple_fields_for :users do |user| %>
+    <div id="emailFields" data-nextid="1">
+      <%= render "email_field",user: user, id: 0%>
+    </div>
+
+    <a id="addEmail">Ajouter une invitation</a>
+
+
+    <script>
+     var emailBtn = document.getElementById("addEmail");
+     var emailDiv = document.getElementById("emailFields");
+     var emailField = "<%= j render "email_field",user: user, id: 0 %>";
+
+
+     emailBtn.addEventListener("click",function() {
+      emailDiv.insertAdjacentHTML("beforeend", emailField);
+      var nextId = Number(emailDiv.dataset.nextid);
+      var input = emailDiv.lastElementChild.lastElementChild;
+
+      input.name = `invitations[users][email_${nextId}]`;
+      emailDiv.dataset.nextid = nextId + 1 ;
+     });
+    </script>
+  <% end %>
+  <%= f.submit "Lancer les invitations" %>
 <% end %>
+
+
+
