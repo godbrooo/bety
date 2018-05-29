@@ -4,6 +4,11 @@ class BetsController < ApplicationController
     @bets_pending = current_user.bets.pending
     @bets_ongoing = current_user.bets.ongoing
     @bets_closed = current_user.bets.closed
+    @reward = 0
+    current_user.prizes do |prize|
+      @reward = prize.reward + @reward
+    end
+
 
 
   end
