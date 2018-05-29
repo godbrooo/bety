@@ -85,13 +85,18 @@
   border-top: 1px solid #E6E6E6;
 }
 
+.nav-icons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .fas {
   color: white;
   font-size: 35px;
+  position: relative;
 }
 
-.list-inline {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-}

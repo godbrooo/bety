@@ -8,10 +8,11 @@
 
 <div class="text-center">
 
+    <img src=<%= current_user.photo_url ? cl_image_path(current_user.photo, crop: :fill) : image_path("logo.png", crop: :fill) %> class="card-user-big" >
 
-    <%= cl_image_tag current_user.photo, class: "card-user-big" %>
   </div>
 
+  <h1 class="text-center">William Hutter</h1>
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
@@ -39,13 +40,14 @@
 
 
         <div class="card">
+
+          <a href="toto.html" class=""></a>
+          <%= link_to "", bet_path(bet), class: "card-link" %>
           <div class="card-body"
                style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
 
             <div class="card-description">
-            <h2><%= link_to bet.game.title, bet_path(bet) %>
-
-              </h2>
+            <h2><%= link_to bet.game.title, bet_path(bet) %></h2>
 
             </div>
 
@@ -74,6 +76,7 @@
 
 
         <div class="card">
+          <%= link_to "", bet_path(bet), class: "card-link" %>
           <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
 
 
@@ -108,6 +111,7 @@
 
 
         <div class="card">
+          <%= link_to "", bet_path(bet), class: "card-link" %>
           <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
 
             <div class="card-description">
@@ -139,4 +143,22 @@
 
 
 </div>
+
+
+<!-- a ranger !!!!! -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+  // Javascript to enable link to tab
+var url = document.location.toString();
+if (url.match('#')) {
+    $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+}
+
+// Change hash for page-reload
+$('.nav-tabs a').on('shown.bs.tab', function (e) {
+    window.location.hash = e.target.hash;
+})
+</script>
 
