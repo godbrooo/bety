@@ -1,5 +1,3 @@
-
-
 <div class="container">
 
 
@@ -12,14 +10,18 @@
 
   </div>
 
-  <h1 class="text-center">William Hutter</h1>
+  <h1 class="h1-index">William Hutter</h1>
+  <h4 class="h4-index">SOMME DE MES GAINS</h4>
+  <h2 class="h2-index"><%= @reward %>€</h2>
+
+  <h4 class="h4-index">MES PARIS</h4>
 
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
+  <ul class="nav nav-pills" role="tablist">
 
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><h6>A valider</h6></a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><h6>Encours</h6></a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><h6>Terminés</h6></a></li>
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><p><%= @bets_pending.count %></p><h6>A valider</h6></a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><p><%= @bets_ongoing.count %></p><h6>En cours</h6></a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><p><%= @bets_closed.count %></p><h6>Terminés</h6></a></li>
 
   </ul>
 
