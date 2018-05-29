@@ -1,8 +1,27 @@
-.nav-pills {
+.nav-pills-index {
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
   box-shadow: 0px 1px 1px 1px rgba(0, 0, 255, .2);
+}
+
+.nav-pills-index > li {
+  float: left;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.nav-pills-index > li > a {
+  color: #d42828;
+  text-decoration: none;
+  border-radius: 10px;
+
+}
+
+.nav-pills-index > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  color: #fff;
+  background-color: #d42828;
+  border-radius: 10px;
 }
 
 // .li-tabs {
