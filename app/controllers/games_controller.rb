@@ -36,17 +36,29 @@ def invite; end
 
 
   def save_invite
-    # raise
     @game = Game.find(params[:id])
-    email = params[:user][:email]
-    user = User.invite!(email: email)
-    bet = Bet.new(user: user, game: @game, challenger: false)
+    user_emails = params[:invitations][:users]
+    success = true
+
+    user_emails.each do |_key, email|
+      user = User.invite!(email: email)
+      bet = Bet.new(user: user, game: @game, challenger: false)
+
+
       if bet.save
-        redirect_to bet_path(bet)
         bet.pending!
       else
-        render :invite
+        success = false
       end
+    end
+
+    if success
+      bet = current_user.bets.find_by(game_id: @game.id)
+      redirect_to bet_path(bet)
+    else
+      flash[:error] ="Les invitations ne se sont pas biens déroulées, veuillez recommencer"
+      render :invite
+    end
   end
 
   def show
