@@ -42,4 +42,3 @@ def close_bets
   end
   redirect_to bets_path
 end
-end
