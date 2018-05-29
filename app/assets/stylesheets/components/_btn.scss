@@ -37,7 +37,7 @@
   background-color: white;
   padding: 15px;
   border-radius: 50px;
-  border: 1px solid white;
+  border: 1px solid #D42828;
 }
 
 .btn-box {
@@ -47,6 +47,7 @@
   margin: 10px 10px 30px 0px;
   border-radius: 1px;
   width: 100%;
+  font-size: 20px;
 
   &:hover {
     color:  #D42828 !important;
@@ -60,6 +61,7 @@
   margin: 10px 10px 30px 0px;
   border-radius: 1px;
   width: 100%;
+  font-size: 20px;
 
   &:hover {
     color: white !important;
