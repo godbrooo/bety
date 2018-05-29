@@ -9,6 +9,15 @@
   align-items: center;
   justify-content: space-between;
 }
+.navbar-mobile {
+  background: #D42828;
+  transition: all 0.3s ease;
+  height: 60px;
+  width: 100%;
+  padding: 10px 0px;
+  position: relative;
+  // right: 10px;
+}
 
 /* Logo */
 .navbar-wagon-brand img {
@@ -75,15 +84,6 @@
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
 }
-.navbar-mobile {
-  background: #D42828;
-  transition: all 0.3s ease;
-  height: 65px;
-  width: 100%;
-  padding: 10px 0px;
-  position: relative;
-  // right: 10px;
-}
 
 .nav-icons {
   list-style: none;
@@ -96,22 +96,7 @@
 
 .fas {
   color: white;
-  font-size: 30px;
+  font-size: 35px;
   position: relative;
 }
 
-.nav-icons > li > p {
-  text-align: center;
-  text-decoration: none;
-  color: white;
-}
-
-// .fas-text {
-//   display: none;
-//   color: white;
-//   font-size: 8px;
-//   margin: 0;
-//   padding: 0;
-//   text-align: center;
-//   line-height: 35px;
-// }
