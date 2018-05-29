@@ -12,7 +12,7 @@
 
   </div>
 
-  <h1 class="text-center">William Hutter</h1>
+  <h1 class="text-center"><%= current_user.user_name ? current_user.user_name : current_user.email %></h1>
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
@@ -41,7 +41,7 @@
 
         <div class="card">
 
-          <a href="toto.html" class=""></a>
+          <a href="" class=""></a>
           <%= link_to "", bet_path(bet), class: "card-link" %>
           <div class="card-body"
                style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
