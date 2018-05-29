@@ -67,12 +67,16 @@
       </div>
        <% end %>
 
+      <div class="card">
       <% if @bets_pending.count == 0 %>
 
+      <p class= "text-center">Aucun paris à valider en ce moment !</p>
+
           <div class="gif-empty-challenge"
-               style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path("empty-state-illustrations.gif")%>');"><p>Aucun paris à valider en ce moment !</p>
-        </div>
+               style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path("empty-state-illustrations.gif")%>');">
+          </div>
         <% end %>
+        </div>
     </div>
 
   <!-- <a class="card-link" href="#" ></a> -->
@@ -92,7 +96,7 @@
 
 
             <div class="card-description">
-              <h2><%= link_to bet.game.description, bet_path(bet) %>
+              <h2><%= link_to bet.game.title, bet_path(bet) %>
 
               </h2>
             </div>

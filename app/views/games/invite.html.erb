@@ -3,9 +3,9 @@
     <div id="emailFields" data-nextid="1">
       <%= render "email_field",user: user, id: 0%>
     </div>
-
-    <a id="addEmail", class="btn btn-bety-red btn-sm">Ajouter une invitation</a>
-
+    <div class="col-xs-6 text-center">
+      <a id="addEmail", class="btn btn-bety-red btn-sm">Ajouter une invitation</a>
+    </div>
 
     <script>
      var emailBtn = document.getElementById("addEmail");
@@ -23,7 +23,9 @@
      });
     </script>
   <% end %>
+  <div class="col-xs-6 text-center">
   <%= f.submit "Lancer les invitations", class: :'btn btn-bety-red btn-sm' %>
+  </div>
 <% end %>
 
 
