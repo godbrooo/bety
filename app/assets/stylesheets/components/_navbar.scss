@@ -10,14 +10,13 @@
   justify-content: space-between;
 }
 .navbar-mobile {
-  // background: #D42828;
+  background: #D42828;
   transition: all 0.3s ease;
-  height: 40px;
-  // padding: 0px 30px;
-  position: absolute;
+  height: 60px;
+  width: 100%;
+  padding: 10px 0px;
+  position: relative;
   // right: 10px;
-  display: flex;
-  justify-content: space-between;
 }
 
 /* Logo */
@@ -87,6 +86,12 @@
 }
 
 .fas {
-  color: lightgray;
+  color: white;
   font-size: 35px;
+}
+
+.list-inline {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }

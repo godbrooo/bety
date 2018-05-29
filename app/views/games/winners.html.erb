@@ -18,6 +18,7 @@
 
       <br>
       <%= simple_form_for @game, url: winners_path, method: :patch do |f| %>
+
         <p>Répartition au format Gagnant/Perdant :</p>
         <% @game.bets.each_with_index do |bet, index| %>
           <%= f.simple_fields_for :prizes do |pr| %>
@@ -40,7 +41,8 @@
             </div>
           <% end %>
         <% end %>
-        <%= f.submit "Fermer le pari et lancer les paiements", class: :'btn btn-bety-red btn-sm' %>
+        <%= f.submit "Fermer le game et lancer les paiements", class: :'btn btn-bety-red btn-sm' %>
+
       <% end %>
     </div>
   </div>
