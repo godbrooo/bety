@@ -1,6 +1,3 @@
-
-
-
 <div class=" col-sm-offset-3 col-sm-6 col-xs-12">
 
 
@@ -58,9 +55,8 @@
 
 
             <ol>
-
-            <%= cl_image_tag prize.user.photo, class: "card-user-prize" %>
-            <% if prize.reward == nil || prize.reward = 0%>
+            <img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" >
+              <% if prize.reward == nil || prize.reward = 0%>
               <%= "#{prize.user.email} a perdu" %>
             <% else %>
               <%= "#{prize.user.email} a gagné #{prize.reward}€" %>
@@ -69,6 +65,7 @@
             <% end %>
 
             </ul>
+
 
           </div>
         </div>

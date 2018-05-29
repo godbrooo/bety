@@ -36,6 +36,9 @@
       </td>
 
       <td>
+
+  <% if @game.category == "winner" %>
+
         <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
         <%= pr.input :ranking,
               collection: @ranking_possibilities,
@@ -44,6 +47,14 @@
               label: false
                %>
           <button class="buttons" data-checkbox= "game_prizes_attributes_<%= index + 1  %>_ranking"> Winner</button>
+
+  <% else %>
+
+      <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
+      <%= pr.input :ranking,
+            collection: @ranking_possibilities
+             %>
+  <% end %>
       </td>
 
       <% end %>
