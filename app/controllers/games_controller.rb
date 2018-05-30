@@ -86,8 +86,6 @@ def invite; end
 def close
   bet = Bet.find(params[:id])
   @game = bet.game
-  #@game.prizes.build
-  binding.pry
   if @game.update(game_params)
     @total_reward = @game.bets.ongoing.count * @game.price
     success = true
