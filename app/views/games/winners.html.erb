@@ -40,12 +40,14 @@
 
                 <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
                 <%= pr.input :ranking,
-                collection: @ranking_possibilities,
-                as: :boolean,
-                input_html: {class:"hidden"},
-                label: false
-                %>
-                <button class="buttons btn-bety-red-border" data-checkbox= "game_prizes_attributes_<%= index + 1  %>_ranking">oui</button>
+                      collection: @ranking_possibilities,
+                      as: :boolean,
+                      input_html: {class:"hidden"},
+                      label: false %>
+                <button class="buttons btn-bety-red-border"
+                        data-checkbox="game_prizes_attributes_<%= index %>_ranking">
+                  oui
+                </button>
 
                 <% else %>
 
@@ -83,7 +85,7 @@
 
   buttons.forEach(function(button) {
     button.addEventListener('click', function(e) {
-      console.log(e.target)
+      // console.log(e.target)
       e.preventDefault();
       var checkbox = document.getElementById(this.dataset.checkbox);
       this.classList.toggle("btn-box-small-click")
