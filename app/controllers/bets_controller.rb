@@ -5,11 +5,11 @@ class BetsController < ApplicationController
     @bets_ongoing = current_user.bets.ongoing
     @bets_closed = current_user.bets.closed
 
-  @reward = Prize.where(user: current_user).where.not(reward: nil).map(&:reward).reduce(:+)
-    end
+     @reward = Prize.where(user: current_user).where.not(reward: nil).map(&:reward).reduce(:+)
+  end
 
   def show
-  @bet = Bet.find(params[:id])
+   @bet = Bet.find(params[:id])
   end
 
   def participate
@@ -32,8 +32,8 @@ class BetsController < ApplicationController
         if bet.status != "ongoing"
           bet.refused!
         end
-        redirect_to bets_path
-      end
+    end
+    redirect_to bets_path
   end
 
 end
