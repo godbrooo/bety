@@ -31,57 +31,55 @@
   <h5> <%= @bet.game.description  %></h5>
   </div>
   <h6> les invités sont</h6>
-    <ul><% @bet.game.bets.each do |bet|%></ul>
-    <ol>
-      <% if bet.status == "closed"%>
-      <% elsif bet.status == "pending"%><%= bet.user.email %><%= " n'a pas encore répondu" %>
+        <ul><% @bet.game.bets.each do |bet|%>
+        <ol>
+          <% if bet.status == "closed"%>
+          <% elsif bet.status == "pending"%><%= bet.user.email %><%= " n'a pas encore répondu" %>
 
-      <% elsif bet.status == "ongoing" then %><%= bet.user.email %><%= " a validé sa participation" %>
+          <% elsif bet.status == "ongoing" then %><%= bet.user.email %><%= " a validé sa participation" %>
 
-      <% elsif bet.status == "denied" then %><%= bet.user.email %><%= " a refusé sa participation" %>
-      <% end %>
-     </ol>
-    <% end %>
-
+          <% elsif bet.status == "denied" then %><%= bet.user.email %><%= " a refusé sa participation" %>
+          <% end %>
+          </ol>
+          </ul>
+          <% end %>
 
 
        <% if @bet.status =="closed" %>
-
-          <div class="card">
-            <div class="card-body-winer">
-              <div class="card-footer flex">
-            <ul>
+          <div class="card-winner">
+            <div class="card-body-winner">
+            <ul >
             <% @bet.game.prizes.each do |prize| %>
+              <ol>
 
-
-            <ol>
-            <img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" >
-              <% if prize.reward == nil || prize.reward = 0%>
-              <%= "#{prize.user.email} a perdu" %>
-            <% else %>
-              <%= "#{prize.user.email} a gagné #{prize.reward}€" %>
+                <% if prize.reward == nil || prize.reward = 0%>
+                  <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a perdu" %></p>
+                <% else %>
+                  <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné #{prize.reward}€" %></p>
+                <% end %>
+                </ol>
             <% end %>
-            </ol>
-            <% end %>
-
             </ul>
-
 
           </div>
         </div>
+
       <% elsif @bet.game.bets.find_by(challenger: true).user == current_user %>
-      <div class="col-xs-6 text-center">
+      <div class="col-xs-12 text-center">
+        <br>
       <%= button_to "Fermer les paris", close_bets_path,
       method: :patch,
-      class: 'btn btn-bety-red btn-sm'%>
+      class: 'btn btn-bety-red-border'%>
       </div>
 
-      <div class="col-xs-6 text-center">
+     <div class="col-xs-12 text-center">
+      <br>
 
 
       <%= button_to "Fin et attribution des prix", winners_path,
       method: :get,
-      class: 'btn btn-bety-red btn-sm'%>
+      class: 'btn btn-bety-red'%>
+      <br>
       </div>
 
       <% else %>
@@ -113,8 +111,7 @@
         <% end %>
       </div>
     </div>
-  </div>
-</div>
+
 <!--
 <script>
 

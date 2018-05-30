@@ -1,73 +1,78 @@
 
 
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-4 col-sm-offset-4 ">
-      <h2>Selectionner le(s) gagnant(s)</h2>
-      </%>
-      <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= @game.photo.present? ? cl_image_path(@game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
-        <div class="card-description">
-          <h2><%= @game.title %></h2>
-        </div>
-
-        <%= cl_image_tag @game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
-
+    <h2>Selectionner le(s) gagnant(s)</h2>
+    <div class="card">
+    <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= @game.photo.present? ? cl_image_path(@game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
+      <div class="card-description">
+        <h2><%= @game.title %></h2>
       </div>
 
-      <div class="card-footer"></div>
+      <%= cl_image_tag @game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
 
-      <br>
-      <table>
-      <%= simple_form_for @game, url: winners_path, method: :patch do |f| %>
-
-      <% @game.bets.each_with_index do |bet, index| %>
-        <%= f.simple_fields_for :prizes do |pr| %>
-    <div>
-
-
-      <tr>
-
-      <td>
-        <img src=<%= bet.user.photo.present? ? cl_image_path(bet.user.photo, crop: :fill) : image_path("user.jpeg") %> class="card-user-small" >
-      </td>
-
-      <td>
-        <%= bet.user.user_name ? bet.user.user_name : bet.user.email %>
-      </td>
-
-      <td>
-
-  <% if @game.category == "winner" %>
-
-        <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
-        <%= pr.input :ranking,
-              collection: @ranking_possibilities,
-              as: :boolean,
-              input_html: {class:"hidden"},
-              label: false
-               %>
-          <button class="buttons" data-checkbox= "game_prizes_attributes_<%= index + 1  %>_ranking"> Winner</button>
-
-  <% else %>
-
-      <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
-      <%= pr.input :ranking,
-            collection: @ranking_possibilities
-             %>
-  <% end %>
-      </td>
-
-      <% end %>
-      <% end %>
-      </table>
-      </div>
-      <%= f.submit "Lancer les paiements", class: :'btn btn-bety-red btn-sm' %>
-      <br>
-
-      <% end %>
-      </div>
     </div>
+
+    <div class="card-footer">
+      <div class="col-xs-12 text-center">
+        <h5> Sélectionne les gagnants</h5>
+
+        <br>
+        <table>
+          <%= simple_form_for @game, url: winners_path, method: :patch do |f| %>
+
+          <% @game.bets.each_with_index do |bet, index| %>
+          <%= f.simple_fields_for :prizes do |pr| %>
+          <div>
+            <tr>
+
+              <td>
+                <img src=<%= bet.user.photo.present? ? cl_image_path(bet.user.photo, crop: :fill) : image_path("user.jpeg") %> class="card-user-prize" >
+              </td>
+              <td>&nbsp</td>
+              <td>
+                <%=" Est ce que #{ bet.user.user_name ? bet.user.user_name : bet.user.email} a gagné(e) " %>
+              </td>
+              <td>&nbsp</td>
+
+              <td>
+
+                <% if @game.category == "winner" %>
+
+                <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
+                <%= pr.input :ranking,
+                collection: @ranking_possibilities,
+                as: :boolean,
+                input_html: {class:"hidden"},
+                label: false
+                %>
+                <button class="buttons btn-bety-red-border" data-checkbox= "game_prizes_attributes_<%= index + 1  %>_ranking">oui</button>
+
+                <% else %>
+
+                <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
+                <%= pr.input :ranking,
+                collection: @ranking_possibilities
+                %>
+                <% end %>
+              </td>
+
+              <% end %>
+              <% end %>
+            </table>
+
+        </div>
+        </div>
+      </div>
+      <div class="col-xs-12 text-center">
+        <%= f.submit "Lancer les paiements", class: :'btn btn-bety-red btn-sm' %>
+      </div>
+      <br>
+
+      <% end %>
+    </div>
+
   </div>
+
 
 
 </div>
