@@ -11,12 +11,11 @@
   </div>
 
 
-  <h1 class="h1-index"><%= current_user.user_name ? current_user.user_name : current_user.email %></h1>
+  <h3 class="h1-index"><%= current_user.user_name ? current_user.user_name : current_user.email %></h3>
   <h4 class="h4-index">SOMME DE MES GAINS</h4>
-  <h2 class="h2-index"><%= @reward %>€</h2>
+  <h3 class="h2-index"><%= @reward %>€</h3>
 
   <h4 class="h4-index">MES PARIS</h4>
-
 
   <!-- Nav tabs -->
   <ul class="nav nav-pills-index" role="tablist">
@@ -52,6 +51,7 @@
 
             <div class="card-description">
             <h2><%= link_to bet.game.title, bet_path(bet) %></h2>
+            <h4>Cliquer sur la carte pour en savoir plus,participer ou refuser</h4>
 
             </div>
 
@@ -70,7 +70,7 @@
       <div class="card">
       <% if @bets_pending.count == 0 %>
 
-      <p class= "text-center">Aucun paris à valider en ce moment !</p>
+      <h6 class= "text-center">Aucun paris à valider en ce moment !</h6>
 
           <div class="gif-empty-challenge"
                style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path("empty-state-illustrations.gif")%>');">
@@ -166,8 +166,8 @@
 
 
 <!-- a ranger !!!!! -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ --><!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
 <script>
   // Javascript to enable link to tab
