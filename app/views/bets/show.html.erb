@@ -16,7 +16,9 @@
 
     </div>
     <div class="card-footer">
-      <p> </p>
+      <p>
+    <div class="fb-share-button" data-href="http://www.bety.eu/bets/<%= @bet.id %>" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.bety.eu%2Fbets%2F<%= @bet.id %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+    </p>
       <p><%= "#{@bet.game.price}€/personne"%></p>
     </div>
 
@@ -35,34 +37,24 @@
 
         <li>
           <% if bet.status == "closed"%>
-          <% elsif bet.status == "pending"%><%= bet.user.user_name ? bet.user.user_name : bet.user.email %><%= " n'a pas encore répondu" %>
+          <% elsif bet.status == "pending"%><img src=<%= bet.user.photo.present? ? cl_image_path(bet.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= bet.user.user_name ? bet.user.user_name : bet.user.email %><%= " n'a pas encore répondu" %>
 
-          <% elsif bet.status == "ongoing" then %><%= bet.user.user_name ? bet.user.user_name : bet.user.email %><%= " a validé sa participation" %>
+          <% elsif bet.status == "ongoing" then %><img src=<%= bet.user.photo.present? ? cl_image_path(bet.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= bet.user.user_name ? bet.user.user_name : bet.user.email %><%= " a validé sa participation" %>
 
-          <% elsif bet.status == "denied" then %><%= bet.user.user_name ? bet.user.user_name : bet.user.email %><%= " a refusé sa participation" %>
+          <% elsif bet.status == "denied" then %><img src=<%= bet.user.photo.present? ? cl_image_path(bet.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= bet.user.user_name ? bet.user.user_name : bet.user.email %><%= " a refusé sa participation" %>
           <% end %>
           </li>
 
           <% end %>
           </ul>
 
-
-
-
-    </div>
-  </div>
-
-  <% elsif @bet.game.bets.find_by(challenger: true).user == current_user %>
-  <div class="col-xs-12 text-center">
-    <div class="fb-share-button" data-href="http://www.bety.eu/bets/<%= @bet.id %>" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.bety.eu%2Fbets%2F<%= @bet.id %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
-  </div>
        <% if @bet.status =="closed" %>
 
             <ul >
             <% @bet.game.prizes.each do |prize| %>
               <li>
 
-                <% if prize.reward == nil || prize.reward == 0%>
+                <% if prize.reward == nil || prize.reward == 0 %>
                   <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a perdu" %></p>
                 <% else %>
                   <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné #{prize.reward}€" %></p>
@@ -82,28 +74,18 @@
       class: 'btn btn-bety-red-border'%>
       </div>
 
+        <div class="col-xs-12 text-center">
+          <br>
 
-  <div class="col-xs-12 text-center">
+            <%= button_to "Fin et attribution des prix", winners_path,
+            method: :get,
+            class: 'btn btn-bety-red'%>
+            <br>
+          </div>
 
-    <br>
-    <%= button_to "Fermer les paris", close_bets_path,
-    method: :patch,
-    class: 'btn btn-bety-red-border'%>
-  </div>
-
-  <div class="col-xs-12 text-center">
-    <br>
-
-
-    <%= button_to "Fin et attribution des prix", winners_path,
-    method: :get,
-    class: 'btn btn-bety-red'%>
-    <br>
-  </div>
-
-  <% else %>
-  <% if @bet.game.status == "ongoing"%>
-  <h1>Les paris sont clos</h1>
+          <% else %>
+          <% if @bet.game.status == "ongoing"%>
+          <h1>Les paris sont clos</h1>
 
 
           <% else %>
