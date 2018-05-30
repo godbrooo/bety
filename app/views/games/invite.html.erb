@@ -1,10 +1,13 @@
+<div class="col-xs-12 ">
+  <br>
 <%= simple_form_for :invitations, url: invite_path, method: :post do |f| %>
   <%= f.simple_fields_for :users do |user| %>
     <div id="emailFields" data-nextid="1">
       <%= render "email_field",user: user, id: 0%>
     </div>
-    <div class="col-xs-6 text-center">
-      <a id="addEmail", class="btn btn-bety-red btn-sm">Ajouter une invitation</a>
+    <div class="col-xs-12 text-center">
+      <br>
+      <a id="addEmail", class="btn btn-bety-red-border">Ajouter une invitation</a>
     </div>
 
     <script>
@@ -23,10 +26,14 @@
      });
     </script>
   <% end %>
-  <div class="col-xs-6 text-center">
-  <%= f.submit "Lancer les invitations", class: :'btn btn-bety-red btn-sm' %>
+  <div class="col-xs-12 text-center">
+    <br>
+  </div>
+  <div class="col-xs-12 text-center">
+  <%= f.submit "Lancer les invitations", class: :'btn btn-bety-red' %>
   </div>
 <% end %>
+</div>
 
 
 

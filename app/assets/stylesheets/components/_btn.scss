@@ -42,12 +42,15 @@
 
 .btn-box {
   background-color: white;
-  box-shadow: 0px 1px 1px 1px rgba(0, 0, 255, .2);
-  height: 110px;
-  margin: 10px 10px 30px 0px;
-  border-radius: 1px;
+  // box-shadow: 0px 1px 1px 1px rgba(0, 0, 255, .2);
+  height: 80px;
+  margin: 10px 10px 10px 0px;
+  border-radius: 10px;
   width: 100%;
-  font-size: 20px;
+  font-size: 15px;
+  border: 1px solid lightgray;
+  white-space: normal;
+
 
   &:hover {
     color:  #D42828 !important;
@@ -57,25 +60,29 @@
 .btn-box-click {
   background-color: #D42828;
   color: white !important;
-  height: 110px;
-  margin: 10px 10px 30px 0px;
-  border-radius: 1px;
+  height: 80px;
+  margin: 10px 10px 10px 0px;
+  border-radius: 10px;
   width: 100%;
-  font-size: 20px;
+  font-size: 15px;
+  white-space: normal;
+
 
   &:hover {
     color: white !important;
+
   }
 }
 
 
 .btn-box-small-click {
+
+
+  color: white;
   background-color: #D42828;
-  color: white !important;
-  height: 25%;
-  margin: 10px 10px 30px 0px;
-  border-radius: 1px;
-  width: 100%;
+  padding: 15px;
+  border-radius: 50px;
+  border: 1px solid white;
 
   &:hover {
     color: white !important;

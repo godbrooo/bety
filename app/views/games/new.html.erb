@@ -32,7 +32,7 @@
       <%# f.input :betyers,
       label: "Invitez des Betyers"%>
 
-      <h4>Type de jeu</h4>
+      <h5>Sélectionner le type de jeu</h5>
       <div class="hidden">
         <%= f.input :category,
              label: 'Type de jeu',
@@ -41,7 +41,7 @@
       <div class="row">
         <div class="col-xs-6">
           <%= f.button :button,
-          "Win / Lose",
+          "Le gagnant rafle tout",
           type: :submit, id: "winner",
           class: :'btn-box'
             %>
@@ -52,7 +52,7 @@
           </div>
           <div class="col-xs-6">
             <%= f.button :button,
-            "Classement",
+            "Les gains sont redistribué par classement",
             type: :submit, id: "ranking",
             class: :'btn-box' %>
 
