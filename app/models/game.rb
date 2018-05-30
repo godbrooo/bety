@@ -15,8 +15,8 @@
 #
 
 class Game < ApplicationRecord
-  has_many :prizes
-  has_many :bets
+  has_many :prizes, dependent: :destroy
+  has_many :bets, dependent: :destroy
   mount_uploader :photo, PhotoUploader
   enum status: [ :pending, :ongoing, :closed]
   enum category: [ :winner, :ranking]
