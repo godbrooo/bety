@@ -49,7 +49,7 @@
         <% @bet.game.prizes.each do |prize| %>
         <ol>
 
-          <% if prize.reward == nil || prize.reward = 0%>
+          <% if prize.reward == nil || prize.reward == 0%>
           <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a perdu" %></p>
           <% else %>
           <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné #{prize.reward}€" %></p>
@@ -65,6 +65,33 @@
   <div class="col-xs-12 text-center">
     <div class="fb-share-button" data-href="http://www.bety.eu/bets/<%= @bet.id %>" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.bety.eu%2Fbets%2F<%= @bet.id %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
   </div>
+       <% if @bet.status =="closed" %>
+          <div class="card-winner">
+            <div class="card-body-winner">
+            <ul >
+            <% @bet.game.prizes.each do |prize| %>
+              <ol>
+
+                <% if prize.reward == nil || prize.reward == 0%>
+                  <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a perdu" %></p>
+                <% else %>
+                  <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné #{prize.reward}€" %></p>
+                <% end %>
+                </ol>
+            <% end %>
+            </ul>
+
+          </div>
+        </div>
+
+      <% elsif @bet.game.bets.find_by(challenger: true).user == current_user %>
+      <div class="col-xs-12 text-center">
+        <br>
+      <%= button_to "Fermer les paris", close_bets_path,
+      method: :patch,
+      class: 'btn btn-bety-red-border'%>
+      </div>
+
 
   <div class="col-xs-12 text-center">
 
