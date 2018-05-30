@@ -8,15 +8,18 @@
 
 
       <%= f.input :title,
+      label: 'Titre du pari entre ami',
+      placeholder: 'Je gagne aux flechettes',
       input_html:{class:'my_input'}%>
       <%= f.input :photo,
        input_html:{class:'my_input'}%>
       <%= f.input :description,
-      placeholder: 'RDV sur la corniche à 19H Sam',
+      label: 'comment, qui, quand',
+      placeholder: 'Au Wagon ce soir',
       input_html:{class:'my_input'}%>
       <%= f.input :price,
-      label: 'Mise',
-      placeholder: '5€',
+      label: 'Mise par personne',
+      placeholder: '2€',
       input_html:{class:'my_input'}%>
 
       <div class="form-group">
@@ -96,7 +99,7 @@
 
         <div class="row" align=center>
           <%= f.button :button,
-          "Lancez le pari",
+          "Lancer le pari",
           type: :submit,
           class: :'btn btn-bety-red'%>
          </div>
