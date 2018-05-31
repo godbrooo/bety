@@ -6,14 +6,18 @@
 
       <%= simple_form_for(@game) do |f| %>
       <%= f.input :title,
-      label: 'Titre du pari entre ami',
-      placeholder: 'Je gagne aux flechettes',
-      input_html:{class:'my_input'}%>
+           label: 'Titre du pari entre ami',
+           placeholder: 'Je gagne aux flechettes',
+           input_html:{class:'my_input'}%>
+
       <%= f.input :photo,
-      label: 'Ajouter une photo',
-       input_html:{class:'my_input'}%>
+            label: 'Ajouter une photo',
+            input_html:{class:'my_input'}
+            %>
+
+
       <%= f.input :description,
-      placeholder: 'qui, quand,comment',
+      placeholder: 'Qui, quand,comment',
 
       input_html:{class:'my_input'}%>
       <%= f.input :price,
@@ -100,7 +104,7 @@
           <%= f.button :button,
           "Lancer le pari",
           type: :submit,
-          class: :'btn btn-bety-red'%>
+          class: :'btn btn-bety-red btn-new-form '%>
          </div>
 
          <% end %>
