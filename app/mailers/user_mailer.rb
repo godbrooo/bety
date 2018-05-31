@@ -7,6 +7,7 @@ class UserMailer < ApplicationMailer
   #
   def invite(user, game)
     @user = user
+    @game = game
 
 
     if @user.user_name != nil
@@ -14,7 +15,14 @@ class UserMailer < ApplicationMailer
     else
       @name = @user.email
     end
-    @game = game
+
+    if @game.bets.first.user.user_name != nil
+    @challenger = @game.bets.first.user.user_name
+    else
+    @challenger = @game.bets.first.user.email
+    end
+
+
     mail(to: @user.email, subject: "Quelqu'un t'a défié - #{@game.title}")
   end
 end
