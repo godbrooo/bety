@@ -15,14 +15,14 @@ class BetsController < ApplicationController
   def participate
     @bet = Bet.find(params[:id])
     @bet.ongoing!
-    redirect_to bets_path(anchor: 'profile')
+    redirect_to bet_path
     # redirect_to betsencours_path
   end
 
   def denied
     @bet = Bet.find(params[:id])
     @bet.refused!
-    redirect_to bets_path
+    redirect_to bet_path
   end
 
   def close_bets
