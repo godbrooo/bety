@@ -13,14 +13,14 @@
       <p>
         <div class="fb-share-button" data-href="http://www.bety.eu/bets/<%= @bet.id %>" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.bety.eu%2Fbets%2F<%= @bet.id %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
       </p>
-      <div class="btn-bety-white-prize align-center">
+      <div class="btn-bety-prize align-center">
           <% if @bet.game.bets.count != nil && @bet.game.price != nil%>
-              <p><%= "Cagnotte en cours #{@bet.game.bets.count * @bet.game.price}€"%></p>
+              <p><%= "Cagnotte #{@bet.game.bets.count * @bet.game.price}€"%></p>
           <% else %>
               <p><%= "Just for Fun"%></p>
               <% end %>
       </div>
-       <div class="btn-bety-white-prize align-center">
+       <div class="btn-bety-prize align-center">
         <p>
       <%= "Mise #{@bet.game.price}€/per"%></p>
       </div>
