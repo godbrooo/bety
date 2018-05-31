@@ -64,27 +64,45 @@
       <!-- logique de bouton -->
 
       <% if @bet.game.bets.find_by(challenger: true).user == current_user %>
-      <div class="col-xs-12 text-center">
-        <br>
-        <br>
-      <%= button_to "Fermer les paris", close_bets_path,
-      method: :patch,
-      class: 'btn btn-bety-red-border'%>
-      </div>
-
-        <div class="col-xs-12 text-center">
-          <br>
-
+        <% if @bet.game.status == "ongoing" %>
+          <div class="col-xs-12 text-center">
+            <br>
             <%= button_to "Fin et attribution des prix", winners_path,
             method: :get,
             class: 'btn btn-bety-red'%>
             <br>
         </div>
+        <% elsif @bet.status == "ongoing"  %>
+        <div class="col-xs-12 text-center">
+        <br>
+        <br>
+          <%= button_to "Fermer les paris", close_bets_path,
+          method: :patch,
+          class: 'btn btn-bety-red-border'%>
+          </div>
+
+        <div class="col-xs-12 text-center">
+          <br>
+            <%= button_to "Fin et attribution des prix", winners_path,
+            method: :get,
+            class: 'btn btn-bety-red'%>
+            <br>
+        </div>
+        <% end %>
 
       <% else %>
+
         <% if @bet.game.status == "ongoing"%>
           <h4>Les paris sont clos</h1>
+
         <% else %>
+          <% if @bet.status == "ongoing"%>
+            <div class="col-xs-12 text-center">
+              <%= button_to "Refuser", denied_path(@bet),
+              method: :patch,
+              class: 'btn btn-bety-red btn-sm'%>
+            </div>
+          <% elsif @bet.status == "pending" %>
           <div class="col-xs-12">
                   <br>
                   <br>
@@ -93,13 +111,14 @@
                 method: :patch,
                 class: 'btn btn-bety-red btn-sm'%>
               </div>
-                  <div class="col-xs-12 text-center">
+              <div class="col-xs-6 text-center">
                   <%= button_to "Refuser", denied_path(@bet),
                   method: :patch,
                   class: 'btn btn-bety-red btn-sm'%>
-                  </div>
-              <% end %>
-            <% end %>
-          </div>
+              </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
 
 

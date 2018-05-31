@@ -33,7 +33,7 @@ class BetsController < ApplicationController
           bet.refused!
         end
     end
-    redirect_to bets_path
+    redirect_to bet_path
   end
 
 end
