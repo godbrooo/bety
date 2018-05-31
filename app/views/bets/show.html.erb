@@ -8,7 +8,10 @@
       </div>
 
 
-      <img src=<%= @bet.user.photo.present? ? cl_image_path(@bet.user.photo, crop: :fill) : image_path("user.jpeg") %> class="card-user" >
+
+
+      <img src=<%= @bet.game.bets.find_by(challenger: true).user.photo_url.present? ? cl_image_path(@bet.game.bets.find_by(challenger: true).user.photo_url, crop: :fill) : image_path("user.jpeg") %> class="card-user" >
+
     </div>
     <div class="card-footer ">
 
