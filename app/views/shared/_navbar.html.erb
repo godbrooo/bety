@@ -47,41 +47,45 @@
 </div>
 <!-- Dropdown list appearing on mobile only -->
 <!-- <div class=row>
- -->
- <div class="navbar-mobile hidden-sm hidden-md hidden-lg">
-    <ul class="nav-icons">
-      <% unless controller_name == 'pages' %>
-      <li>
-        <%= link_to bets_path do %>
-        <i class="fas fa-clipboard-list"></i>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to new_game_path do %>
-        <%= image_tag "logo_fond_blanc.png", height: 40 %>
-<!--         <i class="fas fa-plus-circle"></i>
- -->    <% end %>
-      </li>
+-->
+<div class="navbar-mobile hidden-sm hidden-md hidden-lg">
+  <ul class="nav-icons">
+    <% unless controller_name == 'pages' %>
+    <li>
+      <%= link_to bets_path do %>
+      <i class="fas fa-clipboard-list"></i>
       <% end %>
-      <li>
-        <div class="dropdown">
-          <i class="fas fa-user-circle" data-toggle="dropdown"></i>
-          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <li>
-              <%= link_to edit_user_registration_path do %>
-              <i class="fa fa-pencil-alt"></i> <%= t(".profile", default: "Edit profile") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to destroy_user_session_path, method: :delete do %>
-              <i class="fa fa-sign-out-alt"></i><%= t(".sign_out", default: "Log out") %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
+    </li>
+    <li>
+      <%= link_to new_game_path do %>
+      <%= image_tag "logo_fond_blanc.png", height: 40 %>
+      <% end %>
+    </li>
+    <% end %>
+    <li>
+      <div class="dropdown">
+        <i class="fas fa-user-circle" data-toggle="dropdown"></i>
+        <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+          <li>
+            <%= link_to bets_path do %>
+            <i class="fa fa-clipboard-list"></i><%= t(".bet_index", default: "  Paris en cours")%>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to edit_user_registration_path do %>
+            <i class="fa fa-pencil-alt"></i> <%= t(".profile", default: "Edit profile") %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="fa fa-sign-out-alt"></i><%= t(".sign_out", default: "  Log out") %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
 </div>
+
 
 
