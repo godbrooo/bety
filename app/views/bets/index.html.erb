@@ -57,7 +57,8 @@
 
             </div>
 
-            <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
+
+           <img src=<%= bet.game.bets.find_by(challenger: true).user.photo_url.present? ? cl_image_path(bet.game.bets.find_by(challenger: true).user.photo_url, crop: :fill) : image_path("user.jpeg") %> class="card-user" >
 
           </div>
             <div class="card-footer">
@@ -108,7 +109,8 @@
               </h2>
             </div>
 
-            <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
+            <img src=<%= bet.game.bets.find_by(challenger: true).user.photo_url.present? ? cl_image_path(bet.game.bets.find_by(challenger: true).user.photo_url, crop: :fill) : image_path("user.jpeg") %> class="card-user" >
+
 
           </div>
             <div class="card-footer">
@@ -122,9 +124,19 @@
 
         </div>
       <% end %>
-        <% if @bets_ongoing.count == 0 %>
-          <p>Aucun paris en cours en ce moment ! </p>
+
+
+      <div class="card">
+      <% if @bets_ongoing.count == 0 %>
+      <br>
+      <h6 class= "text-center">Aucun paris à valider en ce moment !</h6>
+
+          <div class="gif-empty-challenge"
+               style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path("empty-state-illustrations.gif")%>');">
+          </div>
         <% end %>
+        </div>
+
     </div>
 
   <!-- <a class="card-link" href="#" ></a> -->
@@ -147,9 +159,7 @@
             </div>
 
 
-          <%= cl_image_tag bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
-
-
+          <img src=<%= bet.game.bets.find_by(challenger: true).user.photo_url.present? ? cl_image_path(bet.game.bets.find_by(challenger: true).user.photo_url, crop: :fill) : image_path("user.jpeg") %> class="card-user" >
 
           </div>
             <div class="card-footer">
@@ -158,6 +168,8 @@
               <p><%= "Cagnotte #{bet.game.bets.count * bet.game.price}€"%></p>
               <% else %>
               <p><%= "Just for Fun"%></p>
+
+
               <% end %>
 
 
@@ -166,9 +178,19 @@
 
       </div>
        <% end %>
-       <% if @bets_closed.count == 0 %>
-         <p>Aucun paris terminé ! </p>
-       <% end %>
+
+       <div class="card">
+       <% if @bets_ongoing.count == 0 %>
+       <br>
+       <h6 class= "text-center">Aucun paris à valider en ce moment !</h6>
+
+           <div class="gif-empty-challenge"
+                style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path("empty-state-illustrations.gif")%>');">
+           </div>
+         <% end %>
+         </div>
+
+
     </div>
 
   <!-- <a class="card-link" href="#" ></a> -->
