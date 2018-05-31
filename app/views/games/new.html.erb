@@ -8,7 +8,9 @@
       <%= f.input :title,
            label: 'Titre du pari entre ami',
            placeholder: 'Je gagne aux flechettes',
-           input_html:{class:'my_input'}%>
+           input_html:{class:'my_input'},
+           required: false
+           %>
 
       <%= f.input :photo,
             label: 'Ajouter une photo',
@@ -17,7 +19,7 @@
 
 
       <%= f.input :description,
-      placeholder: 'Qui, quand,comment',
+      placeholder: 'Qui, quand, comment',
 
       input_html:{class:'my_input'}%>
       <%= f.input :price,
