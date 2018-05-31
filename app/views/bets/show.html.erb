@@ -15,7 +15,7 @@
       </p>
       <div class="btn-bety-white-prize align-center">
           <% if @bet.game.bets.count != nil && @bet.game.price != nil%>
-              <p><%= "Cagnotte en cours #{bet.game.bets.count * bet.game.price}€"%></p>
+              <p><%= "Cagnotte en cours #{@bet.game.bets.count * @bet.game.price}€"%></p>
           <% else %>
               <p><%= "Just for Fun"%></p>
               <% end %>
