@@ -52,4 +52,23 @@ class User < ApplicationRecord
   #   message: "should bet only one time per game" }
 
   mount_uploader :photo, PhotoUploader
+
+
+  attr_accessor :invitation_instructions
+
+  def self.invite_guest!(attributes={}, invited_by=nil)
+   self.invite!(attributes, invited_by) do |invitable|
+     invitable.invitation_instructions = :guest_invitation_instructions
+   end
+  end
+
+
+
+  def self.invite_friend!(attributes={}, invited_by=nil)
+   self.invite!(attributes, invited_by) do |invitable|
+     invitable.invitation_instructions = :friend_invitation_instructions
+   end
+  end
+
+
 end

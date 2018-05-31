@@ -6,7 +6,7 @@
 
 <div class="text-center">
 
-    <img src=<%= current_user.photo_url ? cl_image_path(current_user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-big" >
+    <img src=<%= current_user.photo_url ? cl_image_path(current_user.photo, :width=>150, :height=>150, crop: :crop) : image_path("user.jpeg", crop: :crop) %> class="card-user-big" >
 
   </div>
 
@@ -61,8 +61,13 @@
 
           </div>
             <div class="card-footer">
-              <p><%= bet.game.description %> </p>
-              <p><%= "#{bet.game.price}€/personne"%></p>
+              <p><%= bet.game.description %></p>
+              <% if bet.game.bets.count != nil && bet.game.price != nil%>
+              <p><%= "Cagnotte en cours #{bet.game.bets.count * bet.game.price}€"%></p>
+              <% else %>
+              <p><%= "Just for Fun"%></p>
+              <% end %>
+
             </div>
 
 
@@ -108,7 +113,11 @@
           </div>
             <div class="card-footer">
               <p><%= bet.game.description %> </p>
-              <p><%= "#{bet.game.price}€/personne"%></p>
+              <% if bet.game.bets.count != nil && bet.game.price != nil%>
+              <p><%= "Cagnotte en cours #{bet.game.bets.count * bet.game.price}€"%></p>
+              <% else %>
+              <p><%= "Just for Fun"%></p>
+              <% end %>
             </div>
 
         </div>
@@ -145,7 +154,13 @@
           </div>
             <div class="card-footer">
               <p><%= bet.game.description %> </p>
-              <p><%= "#{bet.game.price}€/personne"%></p>
+              <% if bet.game.bets.count != nil && bet.game.price != nil%>
+              <p><%= "Cagnotte #{bet.game.bets.count * bet.game.price}€"%></p>
+              <% else %>
+              <p><%= "Just for Fun"%></p>
+              <% end %>
+
+
             </div>
 
 

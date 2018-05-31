@@ -32,6 +32,18 @@
   border: 1px solid white;
 }
 
+.btn-bety-prize {
+  display: flex;
+
+  color: #D42828;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #D42828;
+  width: 33%;
+  height: 28px;
+}
+
 .btn-bety-red-border {
   color: #D42828;
   background-color: white;
@@ -112,3 +124,41 @@
   border: 1px solid #D42828;
 }
 
+
+.form-actions input{
+  color: white;
+  background-color: #D42828;
+  padding: 15px;
+  border-radius: 50px;
+  border: 1px solid white;
+
+}
+
+.user_photo input {
+  display: none;
+}
+.user_photo label {
+  color: #D42828;
+  background-color: white;
+  padding: 15px;
+  border-radius: 50px;
+  border: 1px solid #D42828;
+}
+
+.user_photo label:hover {
+  color: #D42828;
+  background-color: white;
+  padding: 15px;
+  border-radius: 50px;
+  border: 1px solid #D42828;
+}
+
+
+.user-actions input{
+  color: white;
+  background-color: #D42828;
+  padding: 15px;
+  border-radius: 50px;
+  border: 1px solid white;
+
+}

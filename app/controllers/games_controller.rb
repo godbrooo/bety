@@ -41,10 +41,14 @@ def invite; end
     success = true
 
     user_emails.each do |_key, email|
-      user = User.invite!(email: email)
+      user = User.find_by(email: email)
+      if user
+        UserMailer.invite(user, @game).deliver_now
+      else
+      user = User.invite!({email: email}, current_user)
+      # user1 = User.invite_guest!(email: email, attributes: {game: @game, bet: bet} ,invited_by: current_user)
+      end
       bet = Bet.new(user: user, game: @game, challenger: false)
-
-
       if bet.save
         bet.pending!
       else
