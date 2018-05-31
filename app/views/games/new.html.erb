@@ -1,12 +1,10 @@
 <div class="container">
+  <br>
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-sm-offset-4 ">
       <%# @game.video %>
-      <h2>Créer ton Bety</h2>
 
       <%= simple_form_for(@game) do |f| %>
-
-
       <%= f.input :title,
       label: 'Titre du pari entre ami',
       placeholder: 'Je gagne aux flechettes',
@@ -16,6 +14,7 @@
        input_html:{class:'my_input'}%>
       <%= f.input :description,
       placeholder: 'qui, quand,comment',
+
       input_html:{class:'my_input'}%>
       <%= f.input :price,
       label: 'Mise par personne',
@@ -55,7 +54,7 @@
           </div>
           <div class="col-xs-6">
             <%= f.button :button,
-            "Les gains sont redistribué par classement",
+            "Les gains sont redistribués par classement",
             type: :submit, id: "ranking",
             class: :'btn-box' %>
 
@@ -92,7 +91,7 @@
               </tr>
             </tbody>
           </table>
-          <p>Exemple de répartition pour un Total de mise de 25€ pour 4 Betyers: </p>
+          <p>Exemple de répartition pour une mise totale de 25€ pour 4 Betyers: </p>
         </div>
 
           <br>
