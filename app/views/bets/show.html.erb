@@ -8,11 +8,18 @@
       </div>
       <%= cl_image_tag @bet.game.bets.find_by(challenger: true).user.photo_url, class: "card-user" %>
     </div>
-    <div class="card-footer">
+    <div class="card-footer ">
+
       <p>
         <div class="fb-share-button" data-href="http://www.bety.eu/bets/<%= @bet.id %>" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.bety.eu%2Fbets%2F<%= @bet.id %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
       </p>
-      <p><%= "#{@bet.game.price}€/personne"%></p>
+      <div class="btn-bety-white-prize align-center">
+       <p><%= "  #{@bet.game.bets.count * @bet.game.price}€ en jeu"%></p>
+      </div>
+       <div class="btn-bety-white-prize align-center">
+        <p>
+      <%= "Mise #{@bet.game.price}€/per"%></p>
+      </div>
     </div>
   </div>
 
