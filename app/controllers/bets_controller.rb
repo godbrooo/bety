@@ -6,6 +6,9 @@ class BetsController < ApplicationController
     @bets_closed = current_user.bets.closed
 
      @reward = Prize.where(user: current_user).where.not(reward: nil).map(&:reward).reduce(:+)
+     if @reward == nil
+      @reward = 0
+    end
   end
 
   def show
