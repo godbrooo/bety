@@ -62,8 +62,11 @@
           </div>
             <div class="card-footer">
               <p><%= bet.game.description %></p>
-
+              <% if bet.game.bets.count != nil && bet.game.price != nil%>
               <p><%= "Cagnotte en cours #{bet.game.bets.count * bet.game.price}€"%></p>
+              <% else %>
+              <p><%= "Just for Fun"%></p>
+              <% end %>
 
             </div>
 
@@ -110,8 +113,12 @@
           </div>
             <div class="card-footer">
               <p><%= bet.game.description %> </p>
+               <p><%= bet.game.description %></p>
+              <% if bet.game.bets.count != nil && bet.game.price != nil%>
               <p><%= "Cagnotte en cours #{bet.game.bets.count * bet.game.price}€"%></p>
-
+              <% else %>
+              <p><%= "Just for Fun"%></p>
+              <% end %>
             </div>
 
         </div>
@@ -148,7 +155,13 @@
           </div>
             <div class="card-footer">
               <p><%= bet.game.description %> </p>
+               <p><%= bet.game.description %></p>
+              <% if bet.game.bets.count != nil && bet.game.price != nil%>
               <p><%= "Cagnotte #{bet.game.bets.count * bet.game.price}€"%></p>
+              <% else %>
+              <p><%= "Just for Fun"%></p>
+              <% end %>
+
 
             </div>
 
