@@ -91,5 +91,24 @@
 
 
 
+.game_photo input {
+  display: none;
+}
 
+// Designer le label
+.game_photo label {
+  color: #D42828;
+  background-color: white;
+  padding: 15px;
+  border-radius: 50px;
+  border: 1px solid #D42828;
+}
+
+.game_photo label:hover {
+  color: #D42828;
+  background-color: white;
+  padding: 15px;
+  border-radius: 50px;
+  border: 1px solid #D42828;
+}
 
