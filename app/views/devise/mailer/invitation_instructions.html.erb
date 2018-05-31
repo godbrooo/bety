@@ -1,4 +1,8 @@
-<p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
+<h3><%= t("devise.mailer.invitation_instructions.hello",
+        email: @resource.email[/[^@]+/].gsub(/\W/, " ").titleize),%></h3>
+
+        <%# @resource.bets.first.game.title %>
+        <%# @resource.invited_by.email %>
 
 <p><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></p>
 
