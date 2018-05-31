@@ -50,8 +50,10 @@
                style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= bet.game.photo.present? ? cl_image_path(bet.game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
 
             <div class="card-description">
-            <h2><%= link_to bet.game.title, bet_path(bet) %></h2>
-            <h4>Cliquer sur la carte pour en savoir plus,participer ou refuser</h4>
+              <h2><%= link_to bet.game.title, bet_path(bet) %></h2>
+              <div class="btn-bety-white-border">
+                Cliquer pour participer ou refuser
+              </div>
 
             </div>
 
@@ -69,7 +71,7 @@
 
       <div class="card">
       <% if @bets_pending.count == 0 %>
-
+      <br>
       <h6 class= "text-center">Aucun paris à valider en ce moment !</h6>
 
           <div class="gif-empty-challenge"
