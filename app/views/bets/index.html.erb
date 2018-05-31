@@ -6,7 +6,7 @@
 
 <div class="text-center">
 
-    <img src=<%= current_user.photo_url ? cl_image_path(current_user.photo, :width=>150, :height=>150, crop: :crop) : image_path("user.jpeg", crop: :crop) %> class="card-user-big" >
+    <img src=<%= current_user.photo_url ? cl_image_path(current_user.photo, :width=>150, :height=>150, crop: :fill) : image_path("user.jpeg", crop: :crop) %> class="card-user-big" >
 
   </div>
 
