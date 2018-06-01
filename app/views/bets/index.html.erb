@@ -20,7 +20,7 @@
   <!-- Nav tabs -->
   <ul class="nav nav-pills-index" role="tablist">
 
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><p><%= @bets_pending.count %></p><h6>A valider</h6></a></li>
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><p><%= @bets_pending.count %></p><h6>À valider</h6></a></li>
     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><p><%= @bets_ongoing.count %></p><h6>En cours</h6></a></li>
     <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><p><%= @bets_closed.count %></p><h6>Terminés</h6></a></li>
 
@@ -51,8 +51,8 @@
 
             <div class="card-description">
               <h2><%= link_to bet.game.title, bet_path(bet) %></h2>
-              <div class="btn-bety-white-border">
-                Cliquer pour participer ou refuser
+              <div class="btn-bety-red">
+                Cliquez pour participer ou refuser
               </div>
 
             </div>
@@ -64,7 +64,7 @@
             <div class="card-footer">
               <p><%= bet.game.description %></p>
               <% if bet.game.bets.count != nil && bet.game.price != nil%>
-              <p><%= "Cagnotte en cours #{bet.game.bets.count * bet.game.price}€"%></p>
+              <p><%= "Cagnotte en cours : #{bet.game.bets.count * bet.game.price}€"%></p>
               <% else %>
               <p><%= "Just for Fun"%></p>
               <% end %>
@@ -78,7 +78,7 @@
       <div class="card">
       <% if @bets_pending.count == 0 %>
       <br>
-      <h6 class= "text-center">Aucun paris à valider en ce moment !</h6>
+      <h6 class= "text-center">Aucun pari à valider en ce moment !</h6>
 
           <div class="gif-empty-challenge"
                style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path("empty-state-illustrations.gif")%>');">
@@ -116,7 +116,7 @@
             <div class="card-footer">
               <p><%= bet.game.description %> </p>
               <% if bet.game.bets.count != nil && bet.game.price != nil%>
-              <p><%= "Cagnotte en cours #{bet.game.bets.count * bet.game.price}€"%></p>
+              <p><%= "Cagnotte en cours : #{bet.game.bets.count * bet.game.price}€"%></p>
               <% else %>
               <p><%= "Just for Fun"%></p>
               <% end %>
@@ -129,7 +129,7 @@
       <div class="card">
       <% if @bets_ongoing.count == 0 %>
       <br>
-      <h6 class= "text-center">Aucun paris à valider en ce moment !</h6>
+      <h6 class= "text-center">Aucun pari à valider en ce moment !</h6>
 
           <div class="gif-empty-challenge"
                style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path("empty-state-illustrations.gif")%>');">
@@ -165,7 +165,7 @@
             <div class="card-footer">
               <p><%= bet.game.description %> </p>
               <% if bet.game.bets.count != nil && bet.game.price != nil%>
-              <p><%= "Cagnotte #{bet.game.bets.count * bet.game.price}€"%></p>
+              <p><%= "Cagnotte : #{bet.game.bets.count * bet.game.price}€"%></p>
               <% else %>
               <p><%= "Just for Fun"%></p>
 
@@ -182,7 +182,7 @@
        <div class="card">
        <% if @bets_ongoing.count == 0 %>
        <br>
-       <h6 class= "text-center">Aucun paris à valider en ce moment !</h6>
+       <h6 class= "text-center">Aucun pari à valider en ce moment !</h6>
 
            <div class="gif-empty-challenge"
                 style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path("empty-state-illustrations.gif")%>');">
