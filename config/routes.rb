@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :bets, only: [:show, :index]
 
+
+  get 'pages/privacy', to: 'pages#privacy', as: :privacy
   # get 'bets#profile', to: 'bets#participate', as: :betsencours
 
   patch 'bets/:id/participate', to: 'bets#participate', as: :participate
