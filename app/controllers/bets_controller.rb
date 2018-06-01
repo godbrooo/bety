@@ -1,4 +1,6 @@
 class BetsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show]
+
   def index
     @bets = current_user.bets
     @bets_pending = current_user.bets.pending
