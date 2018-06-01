@@ -25,7 +25,7 @@ fr:
       confirmed: "Votre compte a été confirmé. Vous êtes maintenant connecté."
     registrations:
       signed_up: "Votre inscription est enregistrée. Si elle est activé, un courriel de confirmation vous a été envoyé."
-      updated: "Votre mise à jour a été prise en compte."
+      update_needs_confirmation: "Votre mise à jour a été prise en compte nous devons vérifier votre nouvelle adresse, un email de confirmation vous a été envoyé."
       destroyed: "Bye! Votre compte est annulé. Nous souhaitons vous revoir bientôt."
     unlocks:
       send_instructions: "Vous allez recevoir un courriel avec des instructions pour déverrouiller votre compte."
