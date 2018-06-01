@@ -16,10 +16,10 @@ class UserMailer < ApplicationMailer
       @name = @user.email
     end
 
-    if @game.bets.first.user.user_name != nil
-    @challenger = @game.bets.first.user.user_name
-    else
+    if @game.bets.first.user.user_name == nil || @game.bets.first.user.user_name == ""
     @challenger = @game.bets.first.user.email
+    else
+    @challenger = @game.bets.first.user.user_name
     end
 
 
