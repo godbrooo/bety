@@ -8,6 +8,10 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
+  def update
+    @game = Game.update(game_params)
+  end
+
   def create
   # binding.pry
     @game = Game.new(game_params)

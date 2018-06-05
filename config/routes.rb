@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {invitations: "invitations"}
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :games, only: [ :new, :create, :show, :index ]
+  resources :games, only: [ :new, :create, :show, :index, :update]
 
   resources :bets, only: [:show, :index]
 
