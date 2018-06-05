@@ -9,7 +9,8 @@ class GamesController < ApplicationController
   end
 
   def update
-    @game = Game.update(game_params)
+   @game = Game.find(params[:id])
+   @game = @game.update(game_params)
   end
 
   def create
