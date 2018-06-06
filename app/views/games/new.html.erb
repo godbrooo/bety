@@ -55,7 +55,7 @@
           class: :'btn-box'
             %>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4 ">
           <h6>Pari/Match</h6>
           <%= f.button :button,
           "Go",
@@ -63,7 +63,7 @@
           class: :'btn-box'
             %>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4 ">
           <h6>Classement</h6>
             <%= f.button :button,
             "Go",
@@ -79,28 +79,40 @@
               <tr>
                 <th scope="col">Equipe</th>
                 <th scope="col">Nom</th>
-                <th scope="col">Mon choix</th>
+
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th scope="row">A</th>
-                <td> ...</td>
-                <td>xxx</td>
+                <td>
+                    <%= f.input :name_a,
+                    placeholder: 'ex France',
+                    input_html:{class:'my_input'}%>
+                </td>
+
               </tr>
               <tr>
                 <th scope="row">B</th>
-                <td>Clémentino</td>
-                <td>30%</td>
+                <td>
+                  <%= f.input :name_b,
+                  placeholder: 'ex Roumanie',
+                  input_html:{class:'my_input'}%>
+                </td>
+
               </tr>
-              <tr>
+             <!--  <tr>
                 <th scope="row">N</th>
                 <td>Match nul</td>
-                <td>xxx</td>
-              </tr>
+
+              </tr> -->
             </tbody>
           </table>
-          <p>Cliquer pour sélectionner</p>
+          <h5>Moi je parie sur...</h5>
+            <%= f.input :match_challenger_bet,
+            collection: Game.match_challenger_bets.keys,
+            include_blank: false  %>
+
         </div>
 
         <div class="hidden" id="calcul">

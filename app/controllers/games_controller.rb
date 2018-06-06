@@ -15,6 +15,7 @@ class GamesController < ApplicationController
     @bet.user = current_user
     @bet.challenger = true
     @bet.game = @game
+    @bet.match_bet = @game.match_challenger_bet
       if @game.save && @bet.save
        @bet.ongoing!
        redirect_to invite_path(@game)
@@ -177,7 +178,7 @@ private
 
 
 def game_params
- params.require(:game).permit(:id, :title, :description, :price, :dead_line,:category,:status, :photo, prizes_attributes: [:ranking, :reward, :game, :user_id])
+ params.require(:game).permit(:id, :title, :description, :price, :dead_line,:category,:status, :photo,:match_challenger_bet,:name_a,:name_b, prizes_attributes: [:ranking, :reward, :game, :user_id])
 end
 
 

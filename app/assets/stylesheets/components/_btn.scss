@@ -175,3 +175,28 @@ width: 90%;
   border: 1px solid white;
 
 }
+
+
+
+.game_name_a label{
+  display:none;
+}
+.game_name_b label{
+  display:none;
+}
+
+.game_match_challenger_bet label{
+  display:none;
+}
+
+.col-form-label {
+
+
+}
+
+#game_match_challenger_bet {
+  border-radius: 50px;
+  height: 50px;
+  text-align: center;
+  width: 80%;
+}
