@@ -78,8 +78,9 @@ def invite; end
     @game = bet.game
     @game.prizes.build
 
-    @ranking_possibilities = if @game.winner?
+    @ranking_possibilities = if @game.winner? || @game.match?
       [["Perdant", 0],["Gagnant", 1]]
+
     else
       # [0,1,2,3]
       [["Perdant", 0] ,["1er",1] ,["2nd",2], ["3ème", 3]]
@@ -102,6 +103,11 @@ def close
         prize.reward = @total_reward / prizes.count
         success = false unless prize.save
       end
+    elsif @game.match?
+      prizes.each do |prize|
+        prize.reward = @total_reward / prizes.count
+        success = false unless prize.save
+      end
 
     elsif @game.ranking?
 
@@ -117,7 +123,7 @@ def close
 
 
 
-        end
+    end
       #  premier_prix = @total_reward * (0.5)
       #  prizes.where(ranking: 1).first.reward = premier_prix.to_i
 
