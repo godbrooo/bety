@@ -86,6 +86,22 @@
       <% end %>
 
     </ul>
+          <div class="col-xs-12 text-center">
+            <br>
+              <%= simple_form_for(@bet.game) do |f| %>
+              <%= f.input :photo,
+              label: 'Prendre une photo souvenir',
+              input_html:{class:'my_input'}
+              %>
+
+            <br>
+
+              <%= f.button :button,
+              "Mettre à jour la photo",
+              type: :submit,
+              class: :'btn btn-bety-red btn-new-form '%>
+              <% end %>
+          </div>
     <% end %>
   </div>
 </div>
