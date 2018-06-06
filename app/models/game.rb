@@ -19,7 +19,7 @@ class Game < ApplicationRecord
   has_many :bets, dependent: :destroy
   mount_uploader :photo, PhotoUploader
   enum status: [ :pending, :ongoing, :closed]
-  enum category: [ :winner, :ranking]
+  enum category: [ :winner, :ranking, :match]
 
   accepts_nested_attributes_for :prizes, reject_if: :all_blank
   validates :title, presence: true

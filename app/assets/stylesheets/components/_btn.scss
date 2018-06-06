@@ -1,3 +1,5 @@
+
+
 .btn-bety-primary {
   color: white;
   border: 1px solid #FFFFFF;
@@ -57,13 +59,14 @@
 .btn-box {
   background-color: white;
   // box-shadow: 0px 1px 1px 1px rgba(0, 0, 255, .2);
-  height: 80px;
+  height: 40px;
   margin: 10px 10px 10px 0px;
-  border-radius: 10px;
+  border-radius: 50px;
   width: 100%;
-  font-size: 15px;
+  font-size: 20px;
   border: 1px solid lightgray;
   white-space: normal;
+  outline:  none;
 
 
   &:hover {
@@ -81,12 +84,13 @@ width: 90%;
 .btn-box-click {
   background-color: #D42828;
   color: white !important;
-  height: 80px;
+  height: 40px;
   margin: 10px 10px 10px 0px;
-  border-radius: 10px;
+  border-radius: 50px;
   width: 100%;
-  font-size: 15px;
+  font-size: 20px;
   white-space: normal;
+  outline:  none;
 
 
   &:hover {

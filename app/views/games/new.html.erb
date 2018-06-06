@@ -47,29 +47,62 @@
              collection: Game.categories.keys, as: :radio_buttons %>
       </div>
       <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-4">
+          <h6>Défi</h6>
           <%= f.button :button,
-          "Le gagnant rafle tout",
+          "Go",
           type: :submit, id: "winner",
           class: :'btn-box'
             %>
-
-         <!--  <%# f.input :custom_field, :status => true do
-         check_box_tag (:status, value = 0)%> -->
-
-          </div>
-          <div class="col-xs-6">
+        </div>
+        <div class="col-xs-4">
+          <h6>Pari/Match</h6>
+          <%= f.button :button,
+          "Go",
+          type: :submit, id: "match",
+          class: :'btn-box'
+            %>
+        </div>
+        <div class="col-xs-4">
+          <h6>Classement</h6>
             <%= f.button :button,
-            "Les gains sont redistribués par classement",
+            "Go",
             type: :submit, id: "ranking",
             class: :'btn-box' %>
-
-    <!--        <%# f.input :custom_field, :status => true do
-          check_box_tag (:status, value = 1)%> -->
-
-          </div>
         </div>
+      </div>
         <p class="hidden" id="explication">"Le ou les gagnants se partage(-ent) les gains de façon équivalente"</p>
+
+        <div class="hidden" id="matchsetup">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Equipe</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Mon choix</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">A</th>
+                <td> ...</td>
+                <td>xxx</td>
+              </tr>
+              <tr>
+                <th scope="row">B</th>
+                <td>Clémentino</td>
+                <td>30%</td>
+              </tr>
+              <tr>
+                <th scope="row">N</th>
+                <td>Match nul</td>
+                <td>xxx</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>Cliquer pour sélectionner</p>
+        </div>
+
         <div class="hidden" id="calcul">
           <table class="table table-striped">
             <thead>
@@ -128,9 +161,14 @@
    }
  }
  var radiowinner= document.getElementById("game_category_winner")
+ var radiomatch= document.getElementById("game_category_match")
  var radioranking= document.getElementById("game_category_ranking")
+
  var winnerBtn = document.getElementById("winner");
  var winnerBtnExplainations = document.getElementById("explication");
+
+ var matchBtn = document.getElementById("match");
+ var matchSetup = document.getElementById("matchsetup");
 
  var rankingBtn = document.getElementById("ranking");
  var simulation = document.getElementById("calcul");
@@ -141,10 +179,18 @@
     if (!simulation.classList.contains('hidden')) {
       simulation.classList.add('hidden');
     }
+    if (!matchSetup.classList.contains('hidden')) {
+      matchSetup.classList.add('hidden');
+    }
 
     if (rankingBtn.classList.contains('btn-box-click')) {
       rankingBtn.classList.remove('btn-box-click');
       rankingBtn.classList.add('btn-box');
+    }
+
+    if (matchBtn.classList.contains('btn-box-click')) {
+      matchBtn.classList.remove('btn-box-click');
+      matchBtn.classList.add('btn-box');
     }
 
     winnerBtnExplainations.classList.toggle("hidden");
@@ -154,16 +200,58 @@
     radiowinner.checked = true;
   });
 
+
+matchBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    if (!simulation.classList.contains('hidden')) {
+      simulation.classList.add('hidden');
+    }
+    if (!winnerBtnExplainations.classList.contains('hidden')) {
+      winnerBtnExplainations.classList.add('hidden');
+    }
+    if (winnerBtn.classList.contains('btn-box-click')) {
+      winnerBtn.classList.remove('btn-box-click');
+      winnerBtn.classList.add('btn-box');
+    }
+
+    if (rankingBtn.classList.contains('btn-box-click')) {
+      rankingBtn.classList.remove('btn-box-click');
+      rankingBtn.classList.add('btn-box');
+    }
+
+    matchSetup.classList.toggle("hidden");
+
+    matchBtn.classList.toggle("btn-box");
+    matchBtn.classList.toggle("btn-box-click");
+    radiomatch.checked = true;
+
+
+    var y = window.innerHeight;
+    window.scroll({top: y, behavior: "smooth"});
+
+
+  });
+
+
 rankingBtn.addEventListener("click", function (event) {
     event.preventDefault();
 
     if (!winnerBtnExplainations.classList.contains('hidden')) {
       winnerBtnExplainations.classList.add('hidden');
     }
+    if (!matchSetup.classList.contains('hidden')) {
+      matchSetup.classList.add('hidden');
+    }
 
     if (winnerBtn.classList.contains('btn-box-click')) {
       winnerBtn.classList.remove('btn-box-click');
       winnerBtn.classList.add('btn-box');
+    }
+
+    if (matchBtn.classList.contains('btn-box-click')) {
+      matchBtn.classList.remove('btn-box-click');
+      matchBtn.classList.add('btn-box');
     }
 
     simulation.classList.toggle("hidden");
