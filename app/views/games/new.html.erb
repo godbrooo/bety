@@ -54,7 +54,7 @@
     </div>
 
     <div class="hidden" id="objetinput">
-     <%= f.input :price,
+     <%= f.input :objet,
         placeholder: 'Bière, resto, la voisine...',
         input_html:{class:'my_input'}
         %>
@@ -346,9 +346,14 @@ objetBtn.addEventListener("click", function (event) {
     event.preventDefault();
 
     if (!argentBtn.classList.contains('hidden')) {
-      simulation.classList.add('hidden');
+      argentinput.classList.add('hidden');
+      argentBtn.classList.toggle();
     }
 
+    if (argentBtn.classList.contains('argentinput')) {
+      winnerBtn.classList.remove('argentinput');
+      // winnerBtn.classList.add('btn-box');
+    }
 
     objetinput.classList.toggle("hidden");
 

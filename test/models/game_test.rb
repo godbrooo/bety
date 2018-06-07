@@ -9,6 +9,7 @@
 #  match_challenger_bet :integer          default("match_nul")
 #  name_a               :string
 #  name_b               :string
+#  objet                :string
 #  photo                :string
 #  price                :integer
 #  status               :integer          default("pending")

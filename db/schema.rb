@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606075435) do
+ActiveRecord::Schema.define(version: 20180607164229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20180606075435) do
     t.string "name_a"
     t.string "name_b"
     t.integer "match_challenger_bet", default: 0
+    t.string "objet"
   end
 
   create_table "prizes", force: :cascade do |t|
