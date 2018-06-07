@@ -81,6 +81,13 @@ def invite; end
   def winners
     bet = Bet.find(params[:id])
     @game = bet.game
+        @game.ongoing!
+        @game.bets.each do |bet|
+          if bet.status != "ongoing"
+            bet.refused!
+          end
+        end
+
     @game.prizes.build
 
     @ranking_possibilities = if @game.winner? || @game.match?
@@ -97,62 +104,64 @@ def invite; end
 def close
   bet = Bet.find(params[:id])
   @game = bet.game
-  if @game.update(game_params)
-    @total_reward = (@game.bets.ongoing.count * @game.price).to_f
-    success = true
-    prizes = @game.prizes.where(ranking:(1..3))
-
-
-    if @game.winner?
-      prizes.each do |prize|
-        prize.reward = @total_reward / prizes.count
-        success = false unless prize.save
-      end
-    elsif @game.match?
-      prizes.each do |prize|
-        prize.reward = @total_reward / prizes.count
-        success = false unless prize.save
-      end
-
-    elsif @game.ranking?
-
-        prizes.each do |prize|
-          if prize.ranking == 1
-            prize.reward = @total_reward * (0.5)
-          elsif prize.ranking == 2
-            prize.reward = @total_reward * (0.3)
-          elsif prize.ranking == 3
-            prize.reward = @total_reward * (0.2)
+      if @game.update(game_params)
+        @total_reward = 0
+          if @game.price == nil
+            @game.price =0
           end
-          prize.save
+
+        @total_reward = (@game.bets.ongoing.count * @game.price).to_f
+        success = true
+        prizes = @game.prizes.where(ranking:(1..3))
 
 
+        if @game.winner?
+          prizes.each do |prize|
+            prize.reward = @total_reward / prizes.count
+            success = false unless prize.save
+          end
+        elsif @game.match?
+          prizes.each do |prize|
+            prize.reward = @total_reward / prizes.count
+            success = false unless prize.save
+          end
 
-    end
-      #  premier_prix = @total_reward * (0.5)
-      #  prizes.where(ranking: 1).first.reward = premier_prix.to_i
+        elsif @game.ranking?
 
-      #  second_prix = prizes.where(:ranking => 2)
-      #  second_prix.first.reward = @total_reward * (0.2)
-      #  prizes.where(:ranking => 2).first.reward = @total_reward * (0.2)
+            prizes.each do |prize|
+              if prize.ranking == 1
+                prize.reward = @total_reward * (0.5)
+              elsif prize.ranking == 2
+                prize.reward = @total_reward * (0.3)
+              elsif prize.ranking == 3
+                prize.reward = @total_reward * (0.2)
+              end
+              prize.save
+            end
+          #  premier_prix = @total_reward * (0.5)
+          #  prizes.where(ranking: 1).first.reward = premier_prix.to_i
 
-      # if prizes.where(:ranking => 3).exists?
-      #  troisieme_prix = prizes.where(:ranking => 3)
-      #  troisieme_prix.first.reward = @total_reward.to_f * (0.1)
-      # end
-    end
- # raise
-    @game.closed!
-    if success
-      redirect_to resume_path
-    else
-      flash[:alert] = "Error during calculating rewards"
-    render :winners
-    end
-  else
-    flash[:alert] = "Error durring saving prizes"
-    render :winners
-  end
+          #  second_prix = prizes.where(:ranking => 2)
+          #  second_prix.first.reward = @total_reward * (0.2)
+          #  prizes.where(:ranking => 2).first.reward = @total_reward * (0.2)
+
+          # if prizes.where(:ranking => 3).exists?
+          #  troisieme_prix = prizes.where(:ranking => 3)
+          #  troisieme_prix.first.reward = @total_reward.to_f * (0.1)
+          # end
+          end
+     # raise
+        @game.closed!
+        if success
+          redirect_to resume_path
+        else
+          flash[:alert] = "Error during calculating rewards"
+        render :winners
+        end
+      else
+        flash[:alert] = "Error durring saving prizes"
+        render :winners
+      end
 end
 # @place.update_attributes(place_params)
 # >>  params["game"][:prizes_attributes]["0"][:ranking]
