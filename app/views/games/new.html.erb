@@ -20,12 +20,45 @@
 
       <%= f.input :description,
       placeholder: 'Qui, quand, comment',
+      input_html:{class:'my_input'}%>
 
-      input_html:{class:'my_input'}%>
-      <%= f.input :price,
-      label: 'Mise par personne',
-      placeholder: '2€',
-      input_html:{class:'my_input'}%>
+
+
+
+      <div class="col-xs-4 ">
+        <h6>Argent</h6>
+        <%= f.button :button,
+        "Go",
+        type: :submit, id: "argent",
+        class: :'btn-box'
+          %>
+      </div>
+
+      <div class="col-xs-4 ">
+        <h6>Autre</h6>
+        <%= f.button :button,
+        "Go",
+        type: :submit, id: "objet",
+        class: :'btn-box'
+          %>
+      </div>
+
+
+
+    <div class="hidden" id="argentinput">
+     <%= f.input :price,
+        label: 'Mise par personne',
+        placeholder: '2€',
+        input_html:{class:'my_input'}
+        %>
+    </div>
+
+    <div class="hidden" id="objetinput">
+     <%= f.input :price,
+        placeholder: 'Bière, resto, la voisine...',
+        input_html:{class:'my_input'}
+        %>
+    </div>
 
       <div class="form-group">
         <input type="checkbox" id="deadline-checkbox" onclick="showDeadline()"> Programmer une fin de pari
@@ -181,6 +214,9 @@
  var winnerBtn = document.getElementById("winner");
  var winnerBtnExplainations = document.getElementById("explication");
 
+ var argentBtn = document.getElementById("argent");
+ var objetBtn = document.getElementById("objet");
+
  var matchBtn = document.getElementById("match");
  var matchSetup = document.getElementById("matchsetup");
 
@@ -280,6 +316,53 @@ rankingBtn.addEventListener("click", function (event) {
 
 
   });
+
+
+
+
+
+
+argentBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    if (!objetBtn.classList.contains('hidden')) {
+      simulation.classList.add('hidden');
+    }
+
+
+    argentinput.classList.toggle("hidden");
+
+    argentBtn.classList.toggle("btn-box");
+    argentBtn.classList.toggle("btn-box-click");
+
+
+    var y = window.innerHeight;
+    window.scroll({top: y, behavior: "smooth"});
+
+
+  });
+
+objetBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    if (!argentBtn.classList.contains('hidden')) {
+      simulation.classList.add('hidden');
+    }
+
+
+    objetinput.classList.toggle("hidden");
+
+    objetBtn.classList.toggle("btn-box");
+    objetBtn.classList.toggle("btn-box-click");
+
+
+    var y = window.innerHeight;
+    window.scroll({top: y, behavior: "smooth"});
+
+
+  });
+
+
 
 
 </script>
