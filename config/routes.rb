@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   # get 'bets#profile', to: 'bets#participate', as: :betsencours
 
   patch 'bets/:id/participate', to: 'bets#participate', as: :participate
+  patch 'bets/:id/pari_a', to: 'bets#pari_a', as: :pari_a
+  patch 'bets/:id/pari_b', to: 'bets#pari_b', as: :pari_b
+  patch 'bets/:id/match_nul', to: 'bets#match_nul', as: :match_nul
   patch 'bets/:id/deny', to: 'bets#denied' , as: :denied
   patch 'bets/:id/close_bets', to: 'bets#close_bets' , as: :close_bets
 

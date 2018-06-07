@@ -1,6 +1,7 @@
 
 
 <div class="container">
+  <div class="col-xs-12 text-center">
     <h2>Selectionner le(s) gagnant(s)</h2>
     <div class="card">
     <div class="card-body" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= @game.photo.present? ? cl_image_path(@game.photo, crop: :fill) :  image_path("challenge.jpeg") %>');">
@@ -27,16 +28,15 @@
 
               <td>
                 <img src=<%= bet.user.photo.present? ? cl_image_path(bet.user.photo, crop: :fill) : image_path("user.jpeg") %> class="card-user-prize" >
-              </td>
-              <td>&nbsp</td>
-              <td>
-                <%=" Est ce que #{ bet.user.user_name ? bet.user.user_name : bet.user.email} a gagné(e) " %>
-              </td>
-              <td>&nbsp</td>
 
-              <td>
 
                 <% if @game.category == "winner" %>
+
+
+
+                <%=" Est ce que #{ bet.user.user_name ? bet.user.user_name : bet.user.email} a gagné(e) " %>
+
+
 
                 <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
                 <%= pr.input :ranking,
@@ -49,7 +49,30 @@
                   oui
                 </button>
 
+                <% elsif  @game.category == "match" %>
+
+
+                    <%="#{ bet.user.user_name ? bet.user.user_name : bet.user.email} a jouer #{bet.match_bet}, a-t-il gagné(e) ?" %>
+
+
+                  <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
+                    <%= pr.input :ranking,
+                      collection: @ranking_possibilities,
+                      as: :boolean,
+                      input_html: {class:"hidden"},
+                      label: false %>
+                <button class="buttons btn-bety-red-border"
+                        data-checkbox="game_prizes_attributes_<%= index %>_ranking">
+                  oui
+                </button>
+
                 <% else %>
+
+
+
+                <%=" Est ce que #{ bet.user.user_name ? bet.user.user_name : bet.user.email} a gagné(e) " %>
+
+
 
                 <%= pr.association :user, as: :hidden, input_html: {value: bet.user.id} %>
                 <%= pr.input :ranking,
@@ -60,6 +83,7 @@
 
               <% end %>
               <% end %>
+            </tr>
             </table>
 
         </div>
@@ -77,7 +101,7 @@
 
 
 
-</div>
+
 
 <script>
 

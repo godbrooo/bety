@@ -17,6 +17,31 @@ class BetsController < ApplicationController
    @bet = Bet.find(params[:id])
   end
 
+  def pari_a
+    @bet = Bet.find(params[:id])
+    @bet.equipe_a_gagne!
+    @bet.ongoing!
+    redirect_to bet_path
+    # redirect_to betsencours_path
+  end
+
+  def pari_b
+    @bet = Bet.find(params[:id])
+    @bet.equipe_b_gagne!
+    @bet.ongoing!
+    redirect_to bet_path
+    # redirect_to betsencours_path
+  end
+
+  def match_nul
+    @bet = Bet.find(params[:id])
+    @bet.match_nul!
+    @bet.ongoing!
+    redirect_to bet_path
+    # redirect_to betsencours_path
+  end
+
+
   def participate
     @bet = Bet.find(params[:id])
     @bet.ongoing!

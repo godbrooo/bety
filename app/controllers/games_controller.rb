@@ -20,6 +20,7 @@ class GamesController < ApplicationController
     @bet.user = current_user
     @bet.challenger = true
     @bet.game = @game
+    @bet.match_bet = @game.match_challenger_bet
       if @game.save && @bet.save
        @bet.ongoing!
        redirect_to invite_path(@game)
@@ -82,8 +83,9 @@ def invite; end
     @game = bet.game
     @game.prizes.build
 
-    @ranking_possibilities = if @game.winner?
+    @ranking_possibilities = if @game.winner? || @game.match?
       [["Perdant", 0],["Gagnant", 1]]
+
     else
       # [0,1,2,3]
       [["Perdant", 0] ,["1er",1] ,["2nd",2], ["3ème", 3]]
@@ -106,6 +108,11 @@ def close
         prize.reward = @total_reward / prizes.count
         success = false unless prize.save
       end
+    elsif @game.match?
+      prizes.each do |prize|
+        prize.reward = @total_reward / prizes.count
+        success = false unless prize.save
+      end
 
     elsif @game.ranking?
 
@@ -121,7 +128,7 @@ def close
 
 
 
-        end
+    end
       #  premier_prix = @total_reward * (0.5)
       #  prizes.where(ranking: 1).first.reward = premier_prix.to_i
 
@@ -182,7 +189,7 @@ private
 
 
 def game_params
- params.require(:game).permit(:id, :title, :description, :price, :dead_line,:category,:status, :photo, prizes_attributes: [:ranking, :reward, :game, :user_id])
+ params.require(:game).permit(:id, :title, :description, :price, :dead_line,:category,:status, :photo,:match_challenger_bet,:name_a,:name_b, prizes_attributes: [:ranking, :reward, :game, :user_id])
 end
 
 

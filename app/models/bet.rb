@@ -4,6 +4,7 @@
 #
 #  id         :bigint(8)        not null, primary key
 #  challenger :boolean
+#  match_bet  :integer          default("match_nul")
 #  status     :integer          default("pending")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -26,5 +27,6 @@ class Bet < ApplicationRecord
 
   belongs_to :user, optional: true
   enum status: [ :pending, :ongoing,:closed,:refused]
+  enum match_bet: [ :match_nul, :equipe_a_gagne, :equipe_b_gagne]
 
 end

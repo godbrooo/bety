@@ -4,6 +4,7 @@
 #
 #  id         :bigint(8)        not null, primary key
 #  challenger :boolean
+#  match_bet  :integer          default("match_nul")
 #  status     :integer          default("pending")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
