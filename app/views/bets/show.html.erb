@@ -73,7 +73,17 @@
 
         <% elsif bet.status == "ongoing" then %><img src=<%= bet.user.photo.present? ? cl_image_path(bet.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= " " %><%= bet.user.user_name ? bet.user.user_name : bet.user.email %><%= " participe " %>
               <% if bet.game.category == "match" %>
-              <%= "et a parié sur #{bet.match_bet}" %>
+              <%= "et a parié sur "%>
+                  <% user_bet = bet.match_bet %>
+                  <% case user_bet %>
+                  <% when "match_nul" %>
+                  <%= "un match nul" %>
+                  <% when "equipe_a_gagne" %>
+                  <%= bet.game.name_a %>
+                  <% when "equipe_b_gagne" %>
+                  <%= bet.game.name_b %>
+                  <% end %>
+
               <% end %>
         <% elsif bet.status == "denied" then %><img src=<%= bet.user.photo.present? ? cl_image_path(bet.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= " " %><%= bet.user.user_name ? bet.user.user_name : bet.user.email %><%= " a refusé" %>
         <% end %>

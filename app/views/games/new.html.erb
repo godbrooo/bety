@@ -90,7 +90,6 @@
                     placeholder: 'ex France',
                     input_html:{class:'my_input'}%>
                 </td>
-
               </tr>
               <tr>
                 <th scope="row">B</th>
@@ -109,8 +108,11 @@
             </tbody>
           </table>
           <h5>Moi je parie sur...</h5>
+
             <%= f.input :match_challenger_bet,
-            collection: Game.match_challenger_bets.keys,
+            collection: [["Match nul", Game.match_challenger_bets.keys.at(0)],[" Le choix A va gagner", Game.match_challenger_bets.keys.at(1)],["Le choix B va gagner", Game.match_challenger_bets.keys.at(2)]],
+
+
             include_blank: false  %>
 
         </div>
