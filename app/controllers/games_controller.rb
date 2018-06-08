@@ -81,6 +81,13 @@ def invite; end
   def winners
     bet = Bet.find(params[:id])
     @game = bet.game
+        @game.ongoing!
+        @game.bets.each do |bet|
+          if bet.status != "ongoing"
+            bet.refused!
+          end
+        end
+
     @game.prizes.build
 
     @ranking_possibilities = if @game.winner? || @game.match?
@@ -97,6 +104,7 @@ def invite; end
 def close
   bet = Bet.find(params[:id])
   @game = bet.game
+
   if @game.update(game_params)
     if @game.price != nil
         @total_reward = (@game.bets.ongoing.count * @game.price).to_f
@@ -132,6 +140,7 @@ def close
 
   elsif @game.objet != nil || @game.objet != ""
 
+
     if @game.winner?
       prizes.each do |prize|
         prize.objet = @game.objet
@@ -164,6 +173,7 @@ def close
     flash[:alert] = "Error durring saving prizes"
     render :winners
   end
+
 end
 # @place.update_attributes(place_params)
 # >>  params["game"][:prizes_attributes]["0"][:ranking]

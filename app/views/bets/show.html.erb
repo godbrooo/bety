@@ -124,14 +124,14 @@
             <br>
               <%= simple_form_for(@bet.game) do |f| %>
               <%= f.input :photo,
-              label: 'Prendre une photo souvenir',
+              label: 'Prendre une nouvelle photo',
               input_html:{class:'my_input'}
               %>
 
             <br>
 
               <%= f.button :button,
-              "Mettre à jour la photo",
+              "Confirmer le changement de photo",
               type: :submit,
               class: :'btn btn-bety-red btn-new-form '%>
               <% end %>
