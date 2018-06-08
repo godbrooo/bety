@@ -47,8 +47,7 @@ def invite; end
     success = true
 
     user_emails.each do |_key, email|
-      if email == nil
-        raise
+      if email == nil|| email == ""
       else
         user = User.find_by(email: email)
           if user
@@ -91,8 +90,10 @@ def invite; end
             bet.refused!
           end
         end
+    @game.prizes.destroy
 
     @game.prizes.build
+
 
     @ranking_possibilities = if @game.winner? || @game.match?
       [["Perdant", 0],["Gagnant", 1]]
