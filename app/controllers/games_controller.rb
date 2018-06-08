@@ -47,18 +47,21 @@ def invite; end
     success = true
 
     user_emails.each do |_key, email|
-      user = User.find_by(email: email)
-      if user
-        UserMailer.invite(user, @game).deliver_now
+      if email == nil|| email == ""
       else
-      user = User.invite!({email: email}, current_user)
-      # user1 = User.invite_guest!(email: email, attributes: {game: @game, bet: bet} ,invited_by: current_user)
-      end
-      bet = Bet.new(user: user, game: @game, challenger: false)
-      if bet.save
-        bet.pending!
-      else
-        success = false
+        user = User.find_by(email: email)
+          if user
+            UserMailer.invite(user, @game).deliver_now
+          else
+          user = User.invite!({email: email}, current_user)
+          # user1 = User.invite_guest!(email: email, attributes: {game: @game, bet: bet} ,invited_by: current_user)
+          end
+        bet = Bet.new(user: user, game: @game, challenger: false)
+          if bet.save
+            bet.pending!
+          else
+            success = false
+          end
       end
     end
 
@@ -87,8 +90,10 @@ def invite; end
             bet.refused!
           end
         end
+    @game.prizes.destroy
 
     @game.prizes.build
+
 
     @ranking_possibilities = if @game.winner? || @game.match?
       [["Perdant", 0],["Gagnant", 1]]
@@ -104,6 +109,8 @@ def invite; end
 def close
   bet = Bet.find(params[:id])
   @game = bet.game
+
+
 
   if @game.update(game_params)
     if @game.price != nil
