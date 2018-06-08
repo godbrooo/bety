@@ -29,13 +29,16 @@
       <div class="btn-bety-prize align-center">
           <% if @bet.game.bets.count != nil && @bet.game.price != nil%>
               <p><%= "Cagnotte #{@bet.game.bets.count * @bet.game.price}€"%></p>
-          <% else %>
+          <% elsif @bet.game.price == nil %>
               <p><%= "Just for Fun"%></p>
-              <% end %>
+          <% end %>
       </div>
        <div class="btn-bety-prize align-center">
-        <p>
-      <%= "Mise #{@bet.game.price}€/pers"%></p>
+        <% if @bet.game.price != nil%>
+          <p><%= "Mise #{@bet.game.price}€/pers"%></p>
+        <% elsif @bet.game.objet != "" %>
+          <p><%= "Cagnotte: '#{@bet.game.objet}'" %></p>
+        <% end %>
       </div>
     </div>
 
