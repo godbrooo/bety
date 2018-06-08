@@ -29,13 +29,16 @@
       <div class="btn-bety-prize align-center">
           <% if @bet.game.bets.count != nil && @bet.game.price != nil%>
               <p><%= "Cagnotte #{@bet.game.bets.count * @bet.game.price}€"%></p>
-          <% else %>
+          <% elsif @bet.game.price == nil %>
               <p><%= "Just for Fun"%></p>
-              <% end %>
+          <% end %>
       </div>
        <div class="btn-bety-prize align-center">
-        <p>
-      <%= "Mise #{@bet.game.price}€/pers"%></p>
+        <% if @bet.game.price != nil%>
+          <p><%= "Mise #{@bet.game.price}€/pers"%></p>
+        <% elsif @bet.game.objet != "" %>
+          <p><%= "Cagnotte: '#{@bet.game.objet}'" %></p>
+        <% end %>
       </div>
     </div>
 
@@ -93,15 +96,28 @@
 
     <% if @bet.status =="closed" %>
     <ul >
-      <% @bet.game.prizes.each do |prize| %>
-      <li>
-        <% if prize.reward == nil || prize.reward == 0 %>
-        <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a perdu" %></p>
-        <% else %>
-        <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné #{prize.reward}€" %></p>
-        <% end %>
-      </li>
+      <% if @bet.game.objet == "" %>
+          <% @bet.game.prizes.each do |prize| %>
+          <li>
+
+            <% if prize.reward == nil || prize.reward == 0 %>
+                <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a perdu" %></p>
+            <% else %>
+               <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné #{prize.reward}€" %></p>
+            <% end %>
+          </li>
+           <% end %>
+      <% elsif @bet.game.objet != ""  %>
+        <% @bet.game.prizes.each do |prize| %>
+
+            <% if prize.objet != nil && prize.objet != "" %>
+              <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné '#{prize.objet}'" %></p>
+            <% elsif prize.objet == nil || prize.objet == "" %>
+              <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a perdu" %></p>
+            <% end %>
       <% end %>
+    <% end %>
+
 
     </ul>
           <div class="col-xs-12 text-center">

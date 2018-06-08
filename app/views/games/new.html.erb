@@ -20,12 +20,27 @@
 
       <%= f.input :description,
       placeholder: 'Qui, quand, comment',
+      input_html:{class:'my_input'}%>
 
-      input_html:{class:'my_input'}%>
-      <%= f.input :price,
-      label: 'Mise par personne',
-      placeholder: '2€',
-      input_html:{class:'my_input'}%>
+      <div id="argentinput">
+     <%= f.input :price,
+        label: 'Mise par personne',
+        placeholder: '2€',
+        input_html:{class:'my_input'}
+        %>
+      </div>
+
+      <div class="form-group">
+        <input type="checkbox" id="objet-checkbox" onclick="showObjet()"> Parier autre chose que de l'argent
+      </div>
+      <div class="hidden" id="objetinput">
+     <%= f.input :objet,
+        label: "Qu'est ce qu'on pari ?",
+        placeholder: 'Bière, resto, la voisine...',
+        input_html:{class:'my_input'},
+        html5: true%>
+    </div>
+
 
       <div class="form-group">
         <input type="checkbox" id="deadline-checkbox" onclick="showDeadline()"> Programmer une fin de pari
@@ -174,12 +189,33 @@
      input.classList.add("hidden");
    }
  }
+
+
+  function showObjet() {
+    var ObjetcheckBox = document.getElementById("objet-checkbox");
+    var objetinput = document.getElementById("objetinput");
+    var argentinput = document.getElementById("argentinput");
+    if (ObjetcheckBox.checked == true){
+      objetinput.classList.remove("hidden");
+      argentinput.classList.add("hidden");
+    } else {
+     objetinput.classList.add("hidden");
+    argentinput.classList.remove("hidden");
+   }
+ }
+
+
+
+
  var radiowinner= document.getElementById("game_category_winner")
  var radiomatch= document.getElementById("game_category_match")
  var radioranking= document.getElementById("game_category_ranking")
 
  var winnerBtn = document.getElementById("winner");
  var winnerBtnExplainations = document.getElementById("explication");
+
+ var argentBtn = document.getElementById("argent");
+ var objetBtn = document.getElementById("objet");
 
  var matchBtn = document.getElementById("match");
  var matchSetup = document.getElementById("matchsetup");
