@@ -104,15 +104,8 @@ def close
     success = true
     prizes = @game.prizes.where(ranking:(1..3))
 
-
-    if @game.winner? && @game.objet != nil
-      prizes.each do |prize|
-        prize.objet = @game.objet
-        success = false unless prize.save
-      end
-
-
-    elsif @game.winner? && @game.objet == nil
+  if @game.objet == nil || @game.objet == ""
+    if @game.winner?
       prizes.each do |prize|
         prize.reward = @total_reward / prizes.count
         success = false unless prize.save
@@ -125,7 +118,6 @@ def close
       end
 
     elsif @game.ranking?
-
         prizes.each do |prize|
           if prize.ranking == 1
             prize.reward = @total_reward * (0.5)
@@ -135,22 +127,31 @@ def close
             prize.reward = @total_reward * (0.2)
           end
           prize.save
-
-
-
+        end
     end
-      #  premier_prix = @total_reward * (0.5)
-      #  prizes.where(ranking: 1).first.reward = premier_prix.to_i
 
-      #  second_prix = prizes.where(:ranking => 2)
-      #  second_prix.first.reward = @total_reward * (0.2)
-      #  prizes.where(:ranking => 2).first.reward = @total_reward * (0.2)
+  elsif @game.objet != nil || @game.objet != ""
 
-      # if prizes.where(:ranking => 3).exists?
-      #  troisieme_prix = prizes.where(:ranking => 3)
-      #  troisieme_prix.first.reward = @total_reward.to_f * (0.1)
-      # end
+    if @game.winner?
+      prizes.each do |prize|
+        prize.objet = @game.objet
+        success = false unless prize.save
+      end
+
+    elsif @game.match?
+      prizes.each do |prize|
+        prize.objet = @game.objet
+        success = false unless prize.save
+      end
+
+    elsif @game.ranking?
+      prizes.each do |prize|
+        prize.objet = @game.objet
+        success = false unless prize.save
+      end
     end
+
+  end
  # raise
     @game.closed!
     if success
