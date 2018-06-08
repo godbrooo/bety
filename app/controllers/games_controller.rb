@@ -109,64 +109,78 @@ def invite; end
 def close
   bet = Bet.find(params[:id])
   @game = bet.game
-      if @game.update(game_params)
-        @total_reward = 0
-          if @game.price == nil
-            @game.price = 0
-          end
 
+
+
+  if @game.update(game_params)
+    if @game.price != nil
         @total_reward = (@game.bets.ongoing.count * @game.price).to_f
-        success = true
-        prizes = @game.prizes.where(ranking:(1..3))
+    end
+    success = true
+    prizes = @game.prizes.where(ranking:(1..3))
 
-
-        if @game.winner?
-          prizes.each do |prize|
-            prize.reward = @total_reward / prizes.count
-            success = false unless prize.save
-          end
-        elsif @game.match?
-          prizes.each do |prize|
-            prize.reward = @total_reward / prizes.count
-            success = false unless prize.save
-          end
-
-        elsif @game.ranking?
-
-            prizes.each do |prize|
-              if prize.ranking == 1
-                prize.reward = @total_reward * (0.5)
-              elsif prize.ranking == 2
-                prize.reward = @total_reward * (0.3)
-              elsif prize.ranking == 3
-                prize.reward = @total_reward * (0.2)
-              end
-              prize.save
-            end
-          #  premier_prix = @total_reward * (0.5)
-          #  prizes.where(ranking: 1).first.reward = premier_prix.to_i
-
-          #  second_prix = prizes.where(:ranking => 2)
-          #  second_prix.first.reward = @total_reward * (0.2)
-          #  prizes.where(:ranking => 2).first.reward = @total_reward * (0.2)
-
-          # if prizes.where(:ranking => 3).exists?
-          #  troisieme_prix = prizes.where(:ranking => 3)
-          #  troisieme_prix.first.reward = @total_reward.to_f * (0.1)
-          # end
-          end
-     # raise
-        @game.closed!
-        if success
-          redirect_to resume_path
-        else
-          flash[:alert] = "Error during calculating rewards"
-        render :winners
-        end
-      else
-        flash[:alert] = "Error durring saving prizes"
-        render :winners
+  if @game.objet == nil || @game.objet == ""
+    if @game.winner?
+      prizes.each do |prize|
+        prize.reward = @total_reward / prizes.count
+        success = false unless prize.save
       end
+
+    elsif @game.match?
+      prizes.each do |prize|
+        prize.reward = @total_reward / prizes.count
+        success = false unless prize.save
+      end
+
+    elsif @game.ranking?
+        prizes.each do |prize|
+          if prize.ranking == 1
+            prize.reward = @total_reward * (0.5)
+          elsif prize.ranking == 2
+            prize.reward = @total_reward * (0.3)
+          elsif prize.ranking == 3
+            prize.reward = @total_reward * (0.2)
+          end
+          prize.save
+        end
+    end
+
+  elsif @game.objet != nil || @game.objet != ""
+
+
+    if @game.winner?
+      prizes.each do |prize|
+        prize.objet = @game.objet
+        success = false unless prize.save
+      end
+
+    elsif @game.match?
+      prizes.each do |prize|
+        prize.objet = @game.objet
+        success = false unless prize.save
+      end
+
+    elsif @game.ranking?
+      prizes.each do |prize|
+        prize.objet = @game.objet
+        success = false unless prize.save
+      end
+    end
+
+  end
+ # raise
+    @game.closed!
+    if success
+      redirect_to resume_path
+    else
+      flash[:alert] = "Error during calculating rewards"
+    render :winners
+    end
+  else
+    flash[:alert] = "Error durring saving prizes"
+    render :winners
+  end
+
 end
 # @place.update_attributes(place_params)
 # >>  params["game"][:prizes_attributes]["0"][:ranking]
@@ -203,7 +217,7 @@ private
 
 
 def game_params
- params.require(:game).permit(:id, :title, :description, :price, :dead_line,:category,:status, :photo,:match_challenger_bet,:name_a,:name_b, prizes_attributes: [:ranking, :reward, :game, :user_id])
+ params.require(:game).permit(:id, :title, :description, :price, :objet, :dead_line,:category,:status, :photo,:match_challenger_bet,:name_a,:name_b, prizes_attributes: [:ranking, :reward, :game, :user_id])
 end
 
 
