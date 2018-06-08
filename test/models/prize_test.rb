@@ -3,6 +3,7 @@
 # Table name: prizes
 #
 #  id         :bigint(8)        not null, primary key
+#  objet      :string
 #  ranking    :integer
 #  reward     :integer
 #  created_at :datetime         not null

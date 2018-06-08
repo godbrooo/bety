@@ -98,16 +98,26 @@ def close
   bet = Bet.find(params[:id])
   @game = bet.game
   if @game.update(game_params)
-    @total_reward = (@game.bets.ongoing.count * @game.price).to_f
+    if @game.price != nil
+        @total_reward = (@game.bets.ongoing.count * @game.price).to_f
+    end
     success = true
     prizes = @game.prizes.where(ranking:(1..3))
 
 
-    if @game.winner?
+    if @game.winner? && @game.objet != nil
+      prizes.each do |prize|
+        prize.objet = @game.objet
+        success = false unless prize.save
+      end
+
+
+    elsif @game.winner? && @game.objet == nil
       prizes.each do |prize|
         prize.reward = @total_reward / prizes.count
         success = false unless prize.save
       end
+
     elsif @game.match?
       prizes.each do |prize|
         prize.reward = @total_reward / prizes.count
@@ -189,7 +199,7 @@ private
 
 
 def game_params
- params.require(:game).permit(:id, :title, :description, :price, :dead_line,:category,:status, :photo,:match_challenger_bet,:name_a,:name_b, prizes_attributes: [:ranking, :reward, :game, :user_id])
+ params.require(:game).permit(:id, :title, :description, :price, :objet, :dead_line,:category,:status, :photo,:match_challenger_bet,:name_a,:name_b, prizes_attributes: [:ranking, :reward, :game, :user_id])
 end
 
 

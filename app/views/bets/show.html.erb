@@ -93,15 +93,32 @@
 
     <% if @bet.status =="closed" %>
     <ul >
-      <% @bet.game.prizes.each do |prize| %>
-      <li>
-        <% if prize.reward == nil || prize.reward == 0 %>
-        <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a perdu" %></p>
-        <% else %>
-        <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné #{prize.reward}€" %></p>
-        <% end %>
-      </li>
+      <% if @bet.game.objet == nil %>
+          <% @bet.game.prizes.each do |prize| %>
+          <li>
+
+            <% if prize.objet != nil %>
+              <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné #{prize.objet}" %></p>
+            <% end %>
+
+            <% if prize.reward == nil || prize.reward == 0 %>
+                <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a perdu" %></p>
+            <% else %>
+               <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné #{prize.reward}€" %></p>
+            <% end %>
+          </li>
+           <% end %>
+      <% elsif @bet.game.objet != nil %>
+        <% @bet.game.prizes.each do |prize| %>
+
+            <% if prize.objet != nil %>
+              <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné #{prize.objet}" %></p>
+            <% else %>
+              <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a perdu" %></p>
+            <% end %>
       <% end %>
+    <% end %>
+
 
     </ul>
           <div class="col-xs-12 text-center">
