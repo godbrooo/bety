@@ -112,7 +112,7 @@ def close
       if @game.update(game_params)
         @total_reward = 0
           if @game.price == nil
-            @game.price =0
+            @game.price = 0
           end
 
         @total_reward = (@game.bets.ongoing.count * @game.price).to_f
