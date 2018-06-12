@@ -84,23 +84,30 @@ def invite; end
   def winners
     bet = Bet.find(params[:id])
     @game = bet.game
-        @game.ongoing!
-        @game.bets.each do |bet|
-          if bet.status != "ongoing"
-            bet.refused!
-          end
-        end
-    @game.prizes.destroy
-
-    @game.prizes.build
-
-
-    @ranking_possibilities = if @game.winner? || @game.match?
-      [["Perdant", 0],["Gagnant", 1]]
-
+    # raise
+    if @game.prizes.exists?
+      redirect_to bet_path(bet)
     else
-      # [0,1,2,3]
-      [["Perdant", 0] ,["1er",1] ,["2nd",2], ["3ème", 3]]
+      @game.ongoing!
+      @game.bets.each do |bet|
+        if bet.status != "ongoing"
+          bet.refused!
+        end
+      end
+
+
+      @game.prizes.destroy
+
+      @game.prizes.build
+
+
+      @ranking_possibilities = if @game.winner? || @game.match?
+        [["Perdant", 0],["Gagnant", 1]]
+
+      else
+        # [0,1,2,3]
+        [["Perdant", 0] ,["1er",1] ,["2nd",2], ["3ème", 3]]
+      end
     end
   end
   # raise
@@ -111,10 +118,15 @@ def close
   @game = bet.game
 
 
+    @game.prizes.each do |prize|
+      if prize.reward != 0
+        prize.destroy
+      end
+    end
 
   if @game.update(game_params)
     if @game.price != nil
-        @total_reward = (@game.bets.ongoing.count * @game.price).to_f
+        @total_reward = ((@game.bets.ongoing.count) * @game.price).to_f
     end
     success = true
     prizes = @game.prizes.where(ranking:(1..3))
@@ -191,6 +203,7 @@ def resume_challenge
   @bets = @game.bets
   @prizes = @game.prizes
   @game.closed!
+  # raise
   @bets.each do |bet|
     bet.closed!
 
