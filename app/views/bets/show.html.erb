@@ -100,10 +100,10 @@
           <% @bet.game.prizes.each do |prize| %>
           <li>
 
-            <% if prize.reward == nil || prize.reward == 0 %>
+            <% if prize.reward == nil %>
                 <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a perdu" %></p>
             <% else %>
-               <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné #{prize.reward}€" %></p>
+               <p><img src=<%= prize.user.photo.present? ? cl_image_path(prize.user.photo, crop: :fill) : image_path("user.jpeg", crop: :fill) %> class="card-user-prize" ><%= "   #{prize.user.email} a gagné" %><%= prize.reward == 0 ? "" : " #{prize.reward}€"%> </p>
             <% end %>
           </li>
            <% end %>
