@@ -84,8 +84,12 @@ def invite; end
   def winners
     bet = Bet.find(params[:id])
     @game = bet.game
-    # raise
+    Prize.all.where(game: @game).delete_all
+    #raise
     if @game.prizes.exists?
+        @game.prizes.each do |prize|
+          prize.destroy!
+        end
       redirect_to bet_path(bet)
     else
       @game.ongoing!
@@ -93,12 +97,11 @@ def invite; end
         if bet.status != "ongoing"
           bet.refused!
         end
-      end
+    end
 
-
-      @game.prizes.destroy
 
       @game.prizes.build
+
 
 
       @ranking_possibilities = if @game.winner? || @game.match?
@@ -127,6 +130,8 @@ def close
   if @game.update(game_params)
     if @game.price != nil
         @total_reward = ((@game.bets.ongoing.count) * @game.price).to_f
+    else
+      @total_reward = 0
     end
     success = true
     prizes = @game.prizes.where(ranking:(1..3))
